@@ -1,35 +1,27 @@
 package model;
 
-import model.Enum.TreatmentStatus;
 import model.Enum.TreatmentType;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class Treatment {
     private Integer id;
     private String name;
     private TreatmentType type;
-    private Cosmetician cosmetician;
     private Double price;
     private Integer duration;
-    private Client client;
-    private TreatmentStatus status;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private String comestician;
 
-    public Treatment(Integer id, String name, TreatmentType type, Cosmetician cosmetician, Double price, Integer duration, Client client, TreatmentStatus status, LocalDateTime startTime, LocalDateTime endTime) {
+
+
+    public Treatment(Integer id, String name, TreatmentType type, Double price, Integer duration, String cosmetician) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.cosmetician = cosmetician;
         this.price = price;
         this.duration = duration;
-        this.client = client;
-        this.status = status;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.comestician = cosmetician;
     }
+
     public Treatment(){}
 
     public Integer getId() {
@@ -55,15 +47,6 @@ public class Treatment {
     public void setType(TreatmentType type) {
         this.type = type;
     }
-
-    public Cosmetician getCosmetician() {
-        return cosmetician;
-    }
-
-    public void setCosmetician(Cosmetician cosmetician) {
-        this.cosmetician = cosmetician;
-    }
-
     public Double getPrice() {
         return price;
     }
@@ -80,35 +63,11 @@ public class Treatment {
         this.duration = duration;
     }
 
-    public Client getClient() {
-        return client;
+    public String getComestician() {
+        return comestician;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public TreatmentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(TreatmentStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public void setComestician(String comestician) {
+        this.comestician = comestician;
     }
 }

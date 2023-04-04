@@ -3,7 +3,10 @@ package model;
 import model.Enum.Gender;
 import model.Enum.Role;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person  {
+    private Integer id;
     private String name;
     private String lastname;
     private Gender gender;
@@ -13,7 +16,8 @@ public class Person {
     private String password;
     private Role role;
 
-    public Person(String name, String lastname, Gender gender, String telephone, String address, String username, String password, Role role) {
+    public Person(Integer id, String name, String lastname, Gender gender, String telephone, String address, String username, String password, Role role) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.gender = gender;
@@ -25,6 +29,13 @@ public class Person {
     }
     public Person(){}
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }

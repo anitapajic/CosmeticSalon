@@ -4,7 +4,9 @@ import model.Enum.EduCoef;
 import model.Enum.Gender;
 import model.Enum.Role;
 
-public class Worker extends Person{
+import java.io.Serializable;
+
+public class Worker extends Person implements Serializable {
     private Double salary;
     private EduCoef educoef;
     private Double yearsOfService;
@@ -12,8 +14,8 @@ public class Worker extends Person{
 
     public static Integer MIN_SALARY = 40000;
 
-    public Worker(String name, String lastname, Gender gender, String telephone, String address, String username, String password, Role role, Double salary, EduCoef educoef, Double yearsOfService, Double bonus) {
-        super(name, lastname, gender, telephone, address, username, password, role);
+    public Worker(Integer id, String name, String lastname, Gender gender, String telephone, String address, String username, String password, Role role, Double salary, EduCoef educoef, Double yearsOfService, Double bonus) {
+        super(id, name, lastname, gender, telephone, address, username, password, role);
         this.salary = salary;
         this.educoef = educoef;
         this.yearsOfService = yearsOfService;
