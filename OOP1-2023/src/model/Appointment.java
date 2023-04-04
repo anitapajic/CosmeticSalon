@@ -13,8 +13,8 @@ public class Appointment extends Treatment {
     private LocalDateTime endTime;
     private TreatmentStatus status;
 
-    public Appointment(Integer id, String name, TreatmentType type, Double price, Integer duration, String client, String cosmetician, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
-        super(id, name, type, price, duration);
+    public Appointment(Integer id, String name, TreatmentType type, Double price, Integer duration, String cosmetician0, String client, String cosmetician, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
+        super(id, name, type, price, duration,cosmetician0);
         this.client = client;
         this.cosmetician = cosmetician;
         this.startTime = startTime;

@@ -67,7 +67,7 @@ public class Treatment {
         return comestician;
     }
 
-    public void setComestician(String comestician) {
+    public void setComestician0(String comestician) {
         this.comestician = comestician;
     }
 }

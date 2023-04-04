@@ -4,9 +4,6 @@ import model.Enum.Gender;
 import model.Enum.LoyalityCardStatus;
 import model.Enum.Role;
 
-import java.io.Serializable;
-import java.util.List;
-
 public class Client extends Person {
     private LoyalityCardStatus cardStatus;
     private Double cardValue;

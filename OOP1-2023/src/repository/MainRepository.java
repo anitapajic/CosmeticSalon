@@ -5,12 +5,16 @@ public class MainRepository {
     private CosmeticianRepository cosmeticianRepository;
     private RecepcionistRepository recepcionistRepository;
     private MenagerRepository menagerRepository;
+    private TreatmentsRepository treatmentsRepository;
+    private AppointmentRepository appointmentRepository;
 
-    public MainRepository(ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository){
+    public MainRepository(ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository, TreatmentsRepository treatmentsRepository, AppointmentRepository appointmentRepository){
         this.clientRepository = clientRepository;
         this.cosmeticianRepository = cosmeticianRepository;
         this.recepcionistRepository = recepcionistRepository;
         this.menagerRepository = menagerRepository;
+        this.treatmentsRepository = treatmentsRepository;
+        this.appointmentRepository = appointmentRepository;
     }
 
     public ClientRepository getClientRepository() {
@@ -43,5 +47,21 @@ public class MainRepository {
 
     public void setMenagerRepository(MenagerRepository menagerRepository) {
         this.menagerRepository = menagerRepository;
+    }
+
+    public TreatmentsRepository getTreatmentsRepository() {
+        return treatmentsRepository;
+    }
+
+    public void setTreatmentsRepository(TreatmentsRepository treatmentsRepository) {
+        this.treatmentsRepository = treatmentsRepository;
+    }
+
+    public AppointmentRepository getAppointmentRepository() {
+        return appointmentRepository;
+    }
+
+    public void setAppointmentRepository(AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
     }
 }

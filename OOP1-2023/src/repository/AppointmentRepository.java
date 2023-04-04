@@ -36,23 +36,16 @@ public class AppointmentRepository {
             t.setType(TreatmentType.valueOf(k[2]));
             t.setPrice(Double.valueOf(k[3]));
             t.setDuration(Integer.valueOf(k[4]));
-            t.setClient(k[5]);
-            t.setCosmetician(k[6]);
-            LocalDateTime date = null;
-            try {
-                date = LocalDateTime.parse(k[7], DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss"));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Invalid date!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            t.setComestician0(k[5]);
+            t.setClient(k[6]);
+            t.setCosmetician(k[7]);
+            LocalDateTime date;
+            date = LocalDateTime.parse(k[8].trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
             t.setStartTime(date);
-            LocalDateTime date2 = null;
-            try {
-                date2 = LocalDateTime.parse(k[8], DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm:ss"));
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Invalid date!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            LocalDateTime date2;
+            date2 = LocalDateTime.parse(k[9].trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
             t.setStartTime(date2);
-            t.setStatus(TreatmentStatus.valueOf(k[9]));
+            t.setStatus(TreatmentStatus.valueOf(k[10]));
             appointmentList.add(t);
 
         }

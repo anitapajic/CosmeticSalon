@@ -30,7 +30,7 @@ public class TreatmentsRepository {
             t.setType(TreatmentType.valueOf(k[2]));
             t.setPrice(Double.valueOf(k[3]));
             t.setDuration(Integer.valueOf(k[4]));
-            t.setComestician(k[5]);
+            t.setComestician0(k[5]);
             treatmentList.add(t);
 
         }
