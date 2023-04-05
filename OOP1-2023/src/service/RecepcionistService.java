@@ -1,19 +1,21 @@
 package service;
 
+import repository.MainRepository;
 import repository.RecepcionistRepository;
 
 public class RecepcionistService {
-    private RecepcionistRepository recepcionistRepository;
+    private MainRepository mainRepository;
 
-    public RecepcionistService(RecepcionistRepository recepcionistRepository){
-        this.recepcionistRepository = recepcionistRepository;
+    public RecepcionistService(MainRepository mainRepository){
+        this.mainRepository = mainRepository;
     }
 
-    public RecepcionistRepository getRecepcionistRepository() {
-        return recepcionistRepository;
+
+    public MainRepository getMainRepository() {
+        return mainRepository;
     }
 
-    public void setRecepcionistRepository(RecepcionistRepository recepcionistRepository) {
-        this.recepcionistRepository = recepcionistRepository;
+    public void setMainRepository(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 }

@@ -1,21 +1,22 @@
 package service;
 
+import repository.MainRepository;
 import repository.TreatmentsRepository;
 
 public class TreatmentService {
 
-    private TreatmentsRepository treatmentsRepository;
+    private MainRepository mainRepository;
 
-    public TreatmentService(TreatmentsRepository treatmentsRepository){
-        this.treatmentsRepository = treatmentsRepository;
+    public TreatmentService(MainRepository mainRepository){
+        this.mainRepository = mainRepository;
     }
 
 
-    public TreatmentsRepository getTreatmentsRepository() {
-        return treatmentsRepository;
+    public MainRepository getMainRepository() {
+        return mainRepository;
     }
 
-    public void setTreatmentsRepository(TreatmentsRepository treatmentsRepository) {
-        this.treatmentsRepository = treatmentsRepository;
+    public void setMainRepository(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 }

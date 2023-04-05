@@ -1,20 +1,30 @@
 package service;
 
+import model.Client;
 import repository.ClientRepository;
+import repository.MainRepository;
 
 public class ClientService {
-    private ClientRepository clientRepository;
+    private MainRepository mainRepository;
 
-    public ClientService(ClientRepository clientRepository){
-        this.clientRepository = clientRepository;
+    public ClientService(MainRepository mainRepository){
+        this.mainRepository = mainRepository;
     }
 
 
-    public ClientRepository getClientRepository() {
-        return clientRepository;
+    public MainRepository getMainRepository() {
+        return mainRepository;
     }
 
-    public void setClientRepository(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+
+    public void setMainRepository(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
+
+    public void addClient(Client client){
+        this.mainRepository.getClientRepository().getClients().add(client);
+    }
+
+
+
 }

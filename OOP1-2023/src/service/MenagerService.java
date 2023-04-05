@@ -1,22 +1,21 @@
 package service;
 
+import repository.MainRepository;
 import repository.MenagerRepository;
 
 public class MenagerService {
-    private MenagerRepository menagerRepository;
+    private MainRepository mainRepository;
 
-
-    public MenagerService(MenagerRepository menagerRepository){
-        this.menagerRepository = menagerRepository;
+    public MenagerService(MainRepository mainRepository){
+        this.mainRepository = mainRepository;
     }
 
 
-
-    public MenagerRepository getMenagerRepository() {
-        return menagerRepository;
+    public MainRepository getMainRepository() {
+        return mainRepository;
     }
 
-    public void setMenagerRepository(MenagerRepository menagerRepository) {
-        this.menagerRepository = menagerRepository;
+    public void setMainRepository(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 }

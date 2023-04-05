@@ -1,21 +1,22 @@
 package service;
 
 import repository.CosmeticianRepository;
+import repository.MainRepository;
 
 public class CosmeticianService {
 
-    private CosmeticianRepository cosmeticianRepository;
+    private MainRepository mainRepository;
 
-    public CosmeticianService(CosmeticianRepository cosmeticianRepository){
-        this.cosmeticianRepository = cosmeticianRepository;
+    public CosmeticianService(MainRepository mainRepository){
+        this.mainRepository = mainRepository;
     }
 
 
-    public CosmeticianRepository getCosmeticianRepository() {
-        return cosmeticianRepository;
+    public MainRepository getMainRepository() {
+        return mainRepository;
     }
 
-    public void setCosmeticianRepository(CosmeticianRepository cosmeticianRepository) {
-        this.cosmeticianRepository = cosmeticianRepository;
+    public void setMainRepository(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 }
