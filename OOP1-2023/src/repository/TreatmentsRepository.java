@@ -9,12 +9,12 @@ import java.util.List;
 import static utils.ReadFromFile.read;
 
 public class TreatmentsRepository {
-    public List<Treatment> treatments;
+    public ArrayList<Treatment> treatments;
 
     public TreatmentsRepository() {
 
         File treatmentsFile = new File("src/data/treatments.csv");
-        List<Treatment> treatmentList = new ArrayList<>();
+        ArrayList<Treatment> treatmentList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -37,7 +37,7 @@ public class TreatmentsRepository {
         this.treatments = treatmentList;
     }
 
-    public List<Treatment> getTreatmentsList(){
+    public ArrayList<Treatment> getTreatmentsList(){
         return this.treatments;
     }
 

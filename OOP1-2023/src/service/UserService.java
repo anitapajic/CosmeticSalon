@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class UserService {
     private MainRepository mainRepository;
@@ -33,6 +34,8 @@ public class UserService {
         this.clientService = new ClientService(this.mainRepository);
         Client newClient;
         newClient = client;
+        int randInt = new Random().nextInt();
+        newClient.setId(randInt);
         newClient.setCardValue(0.0);
         newClient.setCardStatus(LoyalityCardStatus.NO);
         this.clientService.addClient(newClient);
@@ -63,6 +66,13 @@ public class UserService {
             }
         JOptionPane.showMessageDialog(null, "You don't have an account. Please register first.", "Error!",
                 JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public void removeUser(String username){
+        for (Person p:this.mainRepository.getUserRepository().getUsers()){
+            if(username.equalsIgnoreCase(p.getUsername())){
+                this.mainRepository.getUserRepository().getUsers().remove(p);
+            }
         }
     }
 }

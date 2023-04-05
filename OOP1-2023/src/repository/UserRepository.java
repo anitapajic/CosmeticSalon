@@ -14,11 +14,11 @@ import static utils.ReadFromFile.read;
 
 public class UserRepository {
 
-    private List<Person> users = new ArrayList<>();
+    private ArrayList<Person> users = new ArrayList<>();
 
     public UserRepository(){
         File treatmentsFile = new File("src/data/persons.csv");
-        List<Person> userList = new ArrayList<>();
+        ArrayList<Person> userList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -44,7 +44,7 @@ public class UserRepository {
         this.users = userList;
     }
 
-    public List<Person> getUsers(){
+    public ArrayList<Person> getUsers(){
         return this.users;
     }
 }

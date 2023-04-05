@@ -8,10 +8,12 @@ public class MainRepository {
     private TreatmentsRepository treatmentsRepository;
     private AppointmentRepository appointmentRepository;
     private UserRepository userRepository;
+    private WorkerRepository workerRepository;
 
     public MainRepository(){}
 
-    public MainRepository(UserRepository userRepository, ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository, TreatmentsRepository treatmentsRepository, AppointmentRepository appointmentRepository){
+    public MainRepository(WorkerRepository workerRepository, UserRepository userRepository, ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository, TreatmentsRepository treatmentsRepository, AppointmentRepository appointmentRepository){
+        this.workerRepository = workerRepository;
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
         this.cosmeticianRepository = cosmeticianRepository;
@@ -23,6 +25,14 @@ public class MainRepository {
 
     public ClientRepository getClientRepository() {
         return clientRepository;
+    }
+
+    public WorkerRepository getWorkerRepository() {
+        return workerRepository;
+    }
+
+    public void setWorkerRepository(WorkerRepository workerRepository) {
+        this.workerRepository = workerRepository;
     }
 
     public void setClientRepository(ClientRepository clientRepository) {

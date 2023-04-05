@@ -13,10 +13,10 @@ import static utils.ReadFromFile.read;
 
 public class RecepcionistRepository {
 
-    private List<Receptionist> recepcionists = new ArrayList<>();
+    private ArrayList<Receptionist> recepcionists = new ArrayList<>();
     public RecepcionistRepository(){
         File treatmentsFile = new File("src/data/recepcionists.csv");
-        List<Receptionist> recepcionistList = new ArrayList<>();
+        ArrayList<Receptionist> recepcionistList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -35,18 +35,18 @@ public class RecepcionistRepository {
             m.setAddress(k[5]);
             m.setUsername(k[6]);
             m.setPassword(k[7]);
-            m.setRole(Role.RECEPCIONIST);
-            m.setEducoef(EduCoef.valueOf(k[9]));
-            m.setYearsOfService(Double.valueOf(k[10]));
-            m.setBonus(Double.valueOf(k[11]));
-            m.setSalary(Double.valueOf(k[8]));
+            m.setRole(Role.valueOf(k[8]));
+            m.setEducoef(EduCoef.valueOf(k[10]));
+            m.setYearsOfService(Double.valueOf(k[11]));
+            m.setBonus(Double.valueOf(k[12]));
+            m.setSalary(Double.valueOf(k[9]));
             recepcionistList.add(m);
 
         }
         this.recepcionists = recepcionistList;
     }
 
-    public List<Receptionist> getRecepcionists(){
+    public ArrayList<Receptionist> getRecepcionists(){
         return this.recepcionists;
     }
 }

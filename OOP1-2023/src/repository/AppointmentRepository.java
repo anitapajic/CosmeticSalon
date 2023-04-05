@@ -16,11 +16,11 @@ import java.util.List;
 import static utils.ReadFromFile.read;
 
 public class AppointmentRepository {
-    private List<Appointment> appointments = new ArrayList<>();
+    private ArrayList<Appointment> appointments = new ArrayList<>();
 
     public AppointmentRepository(){
         File treatmentsFile = new File("src/data/appointments.csv");
-        List<Appointment> appointmentList = new ArrayList<>();
+        ArrayList<Appointment> appointmentList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -52,7 +52,7 @@ public class AppointmentRepository {
         this.appointments = appointmentList;
     }
 
-    public List<Appointment> getAppointments(){
+    public ArrayList<Appointment> getAppointments(){
         return this.appointments;
     }
 }

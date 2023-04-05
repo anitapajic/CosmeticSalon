@@ -36,11 +36,11 @@ public class MenagerRepository {
             m.setAddress(k[5]);
             m.setUsername(k[6]);
             m.setPassword(k[7]);
-            m.setRole(Role.MENAGER);
-            m.setEducoef(EduCoef.valueOf(k[9]));
-            m.setYearsOfService(Double.valueOf(k[10]));
-            m.setBonus(Double.valueOf(k[11]));
-            m.setSalary(Double.valueOf(k[8]));
+            m.setRole(Role.valueOf(k[8]));
+            m.setEducoef(EduCoef.valueOf(k[10]));
+            m.setYearsOfService(Double.valueOf(k[11]));
+            m.setBonus(Double.valueOf(k[12]));
+            m.setSalary(Double.valueOf(k[9]));
             menagersList.add(m);
 
         }

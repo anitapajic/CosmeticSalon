@@ -63,7 +63,7 @@ public class Treatment {
         this.duration = duration;
     }
 
-    public String getComestician() {
+    public String getComestician0() {
         return comestician;
     }
 

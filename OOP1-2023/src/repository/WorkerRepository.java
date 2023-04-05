@@ -1,23 +1,22 @@
 package repository;
 
-import model.Cosmetician;
 import model.Enum.EduCoef;
 import model.Enum.Gender;
 import model.Enum.Role;
-import model.Menager;
+import model.Enum.TreatmentType;
+import model.Treatment;
+import model.Worker;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 import static utils.ReadFromFile.read;
 
-public class CosmeticianRepository {
-    private ArrayList<Cosmetician> cosmeticians;
-
-    public CosmeticianRepository(){
-        File treatmentsFile = new File("src/data/cosmeticians.csv");
-        ArrayList<Cosmetician> cosmeticianList = new ArrayList<>();
+public class WorkerRepository {
+    private ArrayList<Worker> workers;
+    public void WorkerRepository(){
+        File treatmentsFile = new File("src/data/workers.csv");
+        ArrayList<Worker> workerList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -27,7 +26,7 @@ public class CosmeticianRepository {
         }
 
         for (String[] k : x) {
-            Cosmetician m = new Cosmetician();
+            Worker m = new Worker();
             m.setId(Integer.valueOf(k[0]));
             m.setName(k[1]);
             m.setLastname(k[2]);
@@ -41,13 +40,14 @@ public class CosmeticianRepository {
             m.setYearsOfService(Double.valueOf(k[11]));
             m.setBonus(Double.valueOf(k[12]));
             m.setSalary(Double.valueOf(k[9]));
-            cosmeticianList.add(m);
+
+            workerList.add(m);
 
         }
-        this.cosmeticians = cosmeticianList;
+        this.workers = workerList;
     }
 
-    public ArrayList<Cosmetician> getCosmeticians(){
-        return this.cosmeticians;
+    public ArrayList<Worker> getWorkers(){
+        return this.workers;
     }
 }
