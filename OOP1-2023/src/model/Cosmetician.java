@@ -18,6 +18,15 @@ public class Cosmetician extends Worker {
     public Cosmetician(){
         super();
     }
-
+    public Cosmetician(Person u) {
+        this.setId(u.getId());
+        this.setName(u.getName());
+        this.setLastname(u.getLastname());
+        this.setGender(u.getGender());
+        this.setTelephone(u.getTelephone());
+        this.setAddress(u.getAddress());
+        this.setUsername(u.getUsername());
+        this.setPassword(u.getPassword());
+    }
 
 }
