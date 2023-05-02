@@ -23,6 +23,8 @@ public class LoginWindow extends JFrame {
     MainRepository mainRepository;
     MainService mainService;
 
+    public LoginWindow(){}
+
     public LoginWindow(MainRepository mainRepository, MainService mainService) {
         this.mainRepository = mainRepository;
         this.mainService = mainService;
