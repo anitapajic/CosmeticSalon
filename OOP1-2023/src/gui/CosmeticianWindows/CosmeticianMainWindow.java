@@ -5,6 +5,7 @@ import gui.LoginWindow;
 import model.Cosmetician;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
+import service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,21 +105,22 @@ public class CosmeticianMainWindow extends JFrame {
                 dispose();
                 LoginWindow login = new LoginWindow();
                 login.setVisible(true);
-                //userRepository.upisiPodatke();
+                mainRepository.saveAllData();
             }
         });
 
         btnMyTreatments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TreatmentsWindow uuk = new TreatmentsWindow();
+                TreatmentsWindow uuk = new TreatmentsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), cosmetician);
+
                 uuk.setVisible(true);
             }
         });
         btnMyAppointments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ScheduleWindow uut = new ScheduleWindow();
+                ScheduleWindow uut = new ScheduleWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), cosmetician);
                 uut.setVisible(true);
             }
         });

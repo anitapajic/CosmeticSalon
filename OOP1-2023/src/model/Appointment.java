@@ -70,4 +70,23 @@ public class Appointment extends Treatment {
     public void setStatus(TreatmentStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        String date = getStartTime().getDayOfMonth()+"."+getStartTime().getMonth()+"."+(getStartTime().getYear()+1900)+"." + " " + getStartTime().getHour() + ":" + getStartTime().getMinute();
+        String date2 = getEndTime().getDayOfMonth()+"."+getEndTime().getMonth()+"."+(getEndTime().getYear()+1900)+"." + " " + getEndTime().getHour() + ":" + getEndTime().getMinute();
+
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getType() + "|" +
+                this.getPrice() +
+                this.getDuration() + "|" +
+                this.getComestician0() + "|"+
+                this.getClient() + "|" +
+                this.getCosmetician() + "|" +
+                date + "|" +
+                date2 + "|" +
+                this.getStatus() + "\n";
+
+    }
 }

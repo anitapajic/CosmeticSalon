@@ -104,7 +104,7 @@ public class RecepcionistMainWindow extends JFrame {
                 dispose();
                 LoginWindow login = new LoginWindow();
                 login.setVisible(true);
-                //userRepository.upisiPodatke();
+                mainRepository.saveAllData();
             }
         });
 

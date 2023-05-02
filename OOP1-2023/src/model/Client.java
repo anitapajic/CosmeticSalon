@@ -47,4 +47,17 @@ public class Client extends Person {
         this.cardValue = cardValue;
     }
 
+    @Override
+    public String toString() {
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getLastname() + "|" +
+                this.getGender() +
+                this.getTelephone() + "|" +
+                this.getAddress() + "|" +
+                this.getUsername() + "|" +
+                this.getPassword() + "|" +
+                this.getCardStatus() + "|"+
+                this.getCardValue() + '\n';
+    }
 }

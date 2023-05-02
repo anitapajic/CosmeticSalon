@@ -102,15 +102,14 @@ public class Person  {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", gender=" + gender +
-                ", telephone='" + telephone + '\'' +
-                ", address='" + address + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return  id + "|"+
+                name + "|" +
+                lastname + "|" +
+                gender +
+                telephone + "|" +
+                address + "|" +
+                username + "|" +
+                password + "|" +
+                role + '\n';
     }
 }

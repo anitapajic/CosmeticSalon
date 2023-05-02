@@ -29,4 +29,21 @@ public class Cosmetician extends Worker {
         this.setPassword(u.getPassword());
     }
 
+    @Override
+    public String toString() {
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getLastname() + "|" +
+                this.getGender() +
+                this.getTelephone() + "|" +
+                this.getAddress() + "|" +
+                this.getUsername() + "|" +
+                this.getPassword() + "|" +
+                this.getRole() + "|" +
+                this.getSalary() + "|" +
+                this.getEducoef() + "|" +
+                this.getYearsOfService() + "|" +
+                this.getBonus() + "\n";
+    }
+
 }

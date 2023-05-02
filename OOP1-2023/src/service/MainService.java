@@ -10,8 +10,10 @@ public class MainService {
     private RecepcionistService recepcionistService;
     private AppointmentService appointmentService;
     private TreatmentService treatmentService;
+    private WorkerService workerService;
 
-    public MainService(UserService userService,ClientService clientService, MenagerService menagerService,  CosmeticianService cosmeticianService, RecepcionistService recepcionistService, AppointmentService appointmentService, TreatmentService treatmentService){
+    public MainService(WorkerService workerService, UserService userService,ClientService clientService, MenagerService menagerService,  CosmeticianService cosmeticianService, RecepcionistService recepcionistService, AppointmentService appointmentService, TreatmentService treatmentService){
+        this.workerService = workerService;
         this.userService = userService;
         this.clientService = clientService;
         this.menagerService = menagerService;

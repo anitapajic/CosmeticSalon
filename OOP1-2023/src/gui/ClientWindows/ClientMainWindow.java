@@ -4,7 +4,7 @@ import gui.LoginWindow;
 import model.Client;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
-import service.MainService;
+import service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -109,7 +109,7 @@ public class ClientMainWindow extends JFrame {
                 dispose();
                 LoginWindow login = new LoginWindow();
                 login.setVisible(true);
-                //userRepository.upisiPodatke();
+                mainRepository.saveAllData();
             }
         });
 
@@ -124,7 +124,7 @@ public class ClientMainWindow extends JFrame {
         btnMyAppointments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MyAppointmentsWindow uut = new MyAppointmentsWindow();
+                MyAppointmentsWindow uut = new MyAppointmentsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), client);
                 uut.setVisible(true);
             }
         });
