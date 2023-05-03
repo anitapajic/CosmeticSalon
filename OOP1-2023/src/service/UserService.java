@@ -1,9 +1,12 @@
 package service;
 
-import model.Client;
+import gui.ClientWindows.ClientMainWindow;
+import gui.CosmeticianWindows.CosmeticianMainWindow;
+import gui.MenagerWindows.MenagerMainWindow;
+import gui.RecepcionistWindows.RecepcionistMainWindow;
+import model.*;
 import model.Enum.LoyalityCardStatus;
 import model.Enum.Role;
-import model.Person;
 import repository.MainRepository;
 import repository.UserRepository;
 
@@ -40,7 +43,7 @@ public class UserService {
         newClient.setCardStatus(LoyalityCardStatus.NO);
         this.clientService.addClient(newClient);
 
-        File file1 = new File("src/data/persons.csv");
+        File file1 = new File("src/data/clients.csv");
         utils.WriteToFile.write(file1, this.mainRepository.getClientRepository().getClients());
 
         JOptionPane.showMessageDialog(null, "You are successfully registered!", "Success!",
@@ -51,22 +54,35 @@ public class UserService {
         this.users = mainRepository.getUserRepository().getUsers();
         for(Person u: users){
             if(username.equalsIgnoreCase(u.getUsername()) && password.equalsIgnoreCase(u.getPassword())){
-                if(u.getRole().equals(Role.CLIENT)){
-                    System.out.println("CLIENT");
-                }
-                else if(u.getRole().equals(Role.COSMETICIAN)){
-                    System.out.println("COSMETICIAN");
-                }
-                else if(u.getRole().equals(Role.RECEPCIONIST)){
-                    System.out.println("RECEPCIONIST");
-
-                } else if (u.getRole().equals(Role.MENAGER)) {
-                    System.out.println("MENAGER");
+                switch (u.getRole()) {
+                    case CLIENT -> {
+                        Client client = new Client(u);
+                        ClientMainWindow clientMainWindow = new ClientMainWindow(mainRepository, client);
+                        clientMainWindow.setVisible(true);
+                    }
+                    case COSMETICIAN -> {
+                        Cosmetician cosmetician = new Cosmetician(u);
+                        CosmeticianMainWindow cosmeticianMainWindow = new CosmeticianMainWindow(mainRepository, cosmetician);
+                        cosmeticianMainWindow.setVisible(true);
+                    }
+                    case RECEPCIONIST -> {
+                        Receptionist receptionist = new Receptionist(u);
+                        RecepcionistMainWindow recepcionistMainWindow = new RecepcionistMainWindow(mainRepository, receptionist);
+                        recepcionistMainWindow.setVisible(true);
+                    }
+                    case MENAGER -> {
+                        Menager menager = new Menager(u);
+                        MenagerMainWindow menagerMainWindow = new MenagerMainWindow(mainRepository, menager);
+                        menagerMainWindow.setVisible(true);
+                    }
+                    default -> {
+                        JOptionPane.showMessageDialog(null, "You don't have an account. Please register first.", "Error!",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
-        JOptionPane.showMessageDialog(null, "You don't have an account. Please register first.", "Error!",
-                JOptionPane.ERROR_MESSAGE);
         }
+
     }
     public void removeUser(String username){
         for (Person p:this.mainRepository.getUserRepository().getUsers()){
@@ -74,5 +90,10 @@ public class UserService {
                 this.mainRepository.getUserRepository().getUsers().remove(p);
             }
         }
+    }
+    public void addUser(Person user){
+        this.mainRepository.getUserRepository().getUsers().add(user);
+        File file1 = new File("src/data/persons.csv");
+        utils.WriteToFile.write(file1, this.mainRepository.getUserRepository().getUsers());
     }
 }

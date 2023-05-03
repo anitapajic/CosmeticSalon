@@ -90,4 +90,20 @@ public class Worker extends Person implements Serializable {
         return coef * yearsOfService * MIN_SALARY + bonus;
     }
 
+    @Override
+    public String toString() {
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getLastname() + "|" +
+                this.getGender() + "|" +
+                this.getTelephone() + "|" +
+                this.getAddress() + "|" +
+                this.getUsername() + "|" +
+                this.getPassword() + "|" +
+                this.getRole() + "|" +
+                salary + "|" +
+                educoef + "|" +
+                yearsOfService + "|" +
+                bonus + "\n";
+    }
 }

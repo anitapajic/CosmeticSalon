@@ -70,4 +70,15 @@ public class Treatment {
     public void setComestician0(String comestician) {
         this.comestician = comestician;
     }
+
+    @Override
+    public String toString() {
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getType() + "|" +
+                this.getPrice() + "|" +
+                this.getDuration() + "|" +
+                this.getComestician0() + "\n";
+
+    }
 }

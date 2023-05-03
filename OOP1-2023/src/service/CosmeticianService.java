@@ -31,7 +31,7 @@ public class CosmeticianService {
         for (Cosmetician p:this.mainRepository.getCosmeticianRepository().getCosmeticians()){
             if(username.equalsIgnoreCase(p.getUsername())){
                 this.mainRepository.getCosmeticianRepository().getCosmeticians().remove(p);
-                JOptionPane.showMessageDialog(null, "You successfully fired comsetician.", "Information!",
+                JOptionPane.showMessageDialog(null, "You successfully fired cosmetician.", "Information!",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }

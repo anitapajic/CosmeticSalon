@@ -1,5 +1,7 @@
 package repository;
 
+import java.io.File;
+
 public class MainRepository {
     private ClientRepository clientRepository;
     private CosmeticianRepository cosmeticianRepository;
@@ -21,6 +23,32 @@ public class MainRepository {
         this.menagerRepository = menagerRepository;
         this.treatmentsRepository = treatmentsRepository;
         this.appointmentRepository = appointmentRepository;
+    }
+
+    public void saveAllData(){
+        File file1 = new File("src/data/clients.csv");
+        utils.WriteToFile.write(file1, this.getClientRepository().getClients());
+
+        File file2 = new File("src/data/cosmeticians.csv");
+        utils.WriteToFile.write(file2, this.getCosmeticianRepository().getCosmeticians());
+
+        File file3 = new File("src/data/menagers.csv");
+        utils.WriteToFile.write(file3, this.getMenagerRepository().getMenagers());
+
+        File file4 = new File("src/data/persons.csv");
+        utils.WriteToFile.write(file4, this.getUserRepository().getUsers());
+
+        File file5 = new File("src/data/recepcionists.csv");
+        utils.WriteToFile.write(file5, this.getRecepcionistRepository().getRecepcionists());
+
+        File file6 = new File("src/data/treatments.csv");
+        utils.WriteToFile.write(file6, this.getTreatmentsRepository().getTreatmentsList());
+
+        File file7 = new File("src/data/workers.csv");
+        utils.WriteToFile.write(file7, this.getWorkerRepository().getWorkers());
+
+        File file8 = new File("src/data/appointments.csv");
+        utils.WriteToFile.write(file8, this.getAppointmentRepository().getAppointments());
     }
 
     public ClientRepository getClientRepository() {

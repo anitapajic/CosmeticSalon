@@ -34,20 +34,20 @@ public class MenagerService {
             Cosmetician cosmetician = (Cosmetician) newWorker;
             this.cosmeticianService.addCosmetician(cosmetician);
 
-            File file1 = new File("src/data/cosmeticians.csv");
-            utils.WriteToFile.write(file1, this.mainRepository.getCosmeticianRepository().getCosmeticians());
         }
         else if(newWorker.getRole().equals(Role.RECEPCIONIST)){
             Receptionist receptionist = (Receptionist) newWorker;
             this.recepcionistService.addRecepcionist(receptionist);
 
-            File file1 = new File("src/data/receptionists.csv");
-            utils.WriteToFile.write(file1, this.mainRepository.getRecepcionistRepository().getRecepcionists());
+        }
+        else if (newWorker.getRole().equals(Role.MENAGER)) {
+            Menager menager  = (Menager) newWorker;
+            mainRepository.getMenagerRepository().getMenagers().add(menager);
         }
         Person user = newWorker;
         this.mainRepository.getUserRepository().getUsers().add(user);
-        File file1 = new File("src/data/persons.csv");
-        utils.WriteToFile.write(file1, this.mainRepository.getUserRepository().getUsers());
+
+        this.mainRepository.getWorkerRepository().getWorkers().add(newWorker);
 
     }
 

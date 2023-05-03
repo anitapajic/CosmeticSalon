@@ -17,4 +17,30 @@ public class Menager extends Worker{
 
     public Menager() {
     }
+    public Menager(Person u) {
+        this.setId(u.getId());
+        this.setName(u.getName());
+        this.setLastname(u.getLastname());
+        this.setGender(u.getGender());
+        this.setTelephone(u.getTelephone());
+        this.setAddress(u.getAddress());
+        this.setUsername(u.getUsername());
+        this.setPassword(u.getPassword());
+    }
+    @Override
+    public String toString() {
+        return  this.getId() + "|"+
+                this.getName() + "|" +
+                this.getLastname() + "|" +
+                this.getGender() +
+                this.getTelephone() + "|" +
+                this.getAddress() + "|" +
+                this.getUsername() + "|" +
+                this.getPassword() + "|" +
+                this.getRole() + "|" +
+                this.getSalary() + "|" +
+                this.getEducoef() + "|" +
+                this.getYearsOfService() + "|" +
+                this.getBonus() + "\n";
+    }
 }

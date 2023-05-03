@@ -14,10 +14,10 @@ import java.util.List;
 import static utils.ReadFromFile.read;
 
 public class MenagerRepository {
-    private List<Menager> menagers = new ArrayList<>();
+    private ArrayList<Menager> menagers = new ArrayList<>();
     public MenagerRepository(){
         File treatmentsFile = new File("src/data/menagers.csv");
-        List<Menager> menagersList = new ArrayList<>();
+        ArrayList<Menager> menagersList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
 
         try {
@@ -47,7 +47,7 @@ public class MenagerRepository {
         this.menagers = menagersList;
     }
 
-    public List<Menager> getMenagers(){
+    public ArrayList<Menager> getMenagers(){
         return this.menagers;
     }
 
