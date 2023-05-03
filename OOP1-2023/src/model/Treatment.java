@@ -76,7 +76,7 @@ public class Treatment {
         return  this.getId() + "|"+
                 this.getName() + "|" +
                 this.getType() + "|" +
-                this.getPrice() +
+                this.getPrice() + "|" +
                 this.getDuration() + "|" +
                 this.getComestician0() + "\n";
 

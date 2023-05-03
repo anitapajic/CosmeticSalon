@@ -79,4 +79,12 @@ public class MainService {
     public void setTreatmentService(TreatmentService treatmentService) {
         this.treatmentService = treatmentService;
     }
+
+    public WorkerService getWorkerService() {
+        return workerService;
+    }
+
+    public void setWorkerService(WorkerService workerService) {
+        this.workerService = workerService;
+    }
 }

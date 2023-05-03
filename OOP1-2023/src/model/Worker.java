@@ -95,7 +95,7 @@ public class Worker extends Person implements Serializable {
         return  this.getId() + "|"+
                 this.getName() + "|" +
                 this.getLastname() + "|" +
-                this.getGender() +
+                this.getGender() + "|" +
                 this.getTelephone() + "|" +
                 this.getAddress() + "|" +
                 this.getUsername() + "|" +

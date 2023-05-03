@@ -5,6 +5,7 @@ import gui.LoginWindow;
 import model.Receptionist;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
+import service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,7 +120,8 @@ public class RecepcionistMainWindow extends JFrame {
         btnMyAppointments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AllAppointmentsWindow uut = new AllAppointmentsWindow();
+                AllAppointmentsWindow uut = new AllAppointmentsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), receptionist);
+
                 uut.setVisible(true);
             }
         });

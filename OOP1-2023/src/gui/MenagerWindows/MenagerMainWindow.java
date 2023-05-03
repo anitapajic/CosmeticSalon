@@ -5,6 +5,7 @@ import gui.LoginWindow;
 import model.Menager;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
+import service.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class MenagerMainWindow extends JFrame {
     Menager menager;
     private JButton btnAllWorkers = new JButton("All workers");
     private JButton btnNewWorker = new JButton("Add new worker");
+    private JButton btnTreatments = new JButton("Treatments");
     private JButton btnPriceList = new JButton("Price list");
     private JButton btnLogout = new JButton("Log Out");
 
@@ -48,6 +50,7 @@ public class MenagerMainWindow extends JFrame {
         this.btnAllWorkers.setPreferredSize(d);
         this.btnNewWorker.setPreferredSize(d);
         this.btnPriceList.setPreferredSize(d);
+        this.btnTreatments.setPreferredSize(d);
         this.btnLogout.setPreferredSize(d);
     }
 
@@ -57,6 +60,7 @@ public class MenagerMainWindow extends JFrame {
 
         panelZapad.add(this.btnAllWorkers, "wrap");
         panelZapad.add(this.btnNewWorker, "wrap");
+        panelZapad.add(this.btnTreatments, "wrap");
         panelZapad.add(this.btnPriceList, "wrap");
         panelZapad.add(this.btnLogout, "wrap");
 
@@ -113,14 +117,15 @@ public class MenagerMainWindow extends JFrame {
         btnNewWorker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddNewWorkerWindow uuk = new AddNewWorkerWindow();
+                AddNewWorkerWindow uuk = new AddNewWorkerWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
                 uuk.setVisible(true);
             }
         });
         btnAllWorkers.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AllWorkersWindow uut = new AllWorkersWindow();
+                AllWorkersWindow uut = new AllWorkersWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
+
                 uut.setVisible(true);
             }
         });
@@ -131,5 +136,14 @@ public class MenagerMainWindow extends JFrame {
 //                priceList.setVisible(true);
 //            }
 //        });
+        btnTreatments.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CRUDTreatmentsWindow uut = new CRUDTreatmentsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
+
+                uut.setVisible(true);
+            }
+        });
     }
+
 }
