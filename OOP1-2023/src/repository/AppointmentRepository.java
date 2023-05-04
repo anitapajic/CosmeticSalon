@@ -39,12 +39,15 @@ public class AppointmentRepository {
             t.setComestician0(k[5]);
             t.setClient(k[6]);
             t.setCosmetician(k[7]);
+
             LocalDateTime date;
-            date = LocalDateTime.parse(k[8].trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
+            date = LocalDateTime.parse(k[8], DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
             t.setStartTime(date);
+
             LocalDateTime date2;
-            date2 = LocalDateTime.parse(k[9].trim(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
-            t.setStartTime(date2);
+            date2 = LocalDateTime.parse(k[9], DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
+            t.setEndTime(date2);
+
             t.setStatus(TreatmentStatus.valueOf(k[10]));
             appointmentList.add(t);
 

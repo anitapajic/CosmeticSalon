@@ -105,7 +105,7 @@ public class Person  {
         return  id + "|"+
                 name + "|" +
                 lastname + "|" +
-                gender +
+                gender + "|" +
                 telephone + "|" +
                 address + "|" +
                 username + "|" +

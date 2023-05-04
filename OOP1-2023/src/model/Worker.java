@@ -35,7 +35,7 @@ public class Worker extends Person implements Serializable {
     }
 
     public void setSalary(Double salary) {
-        this.salary = countSalary(this.getCoefFromEduCoef(this.educoef),this.yearsOfService, this.bonus);
+        this.salary = countSalary(this.getCoefFromEduCoef(this.getEducoef()),this.getYearsOfService(), this.getBonus());
     }
 
     public EduCoef getEducoef() {

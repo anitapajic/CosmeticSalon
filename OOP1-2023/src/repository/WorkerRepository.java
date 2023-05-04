@@ -14,7 +14,7 @@ import static utils.ReadFromFile.read;
 
 public class WorkerRepository {
     private ArrayList<Worker> workers;
-    public void WorkerRepository(){
+    public WorkerRepository(){
         File treatmentsFile = new File("src/data/workers.csv");
         ArrayList<Worker> workerList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();

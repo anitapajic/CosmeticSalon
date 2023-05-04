@@ -73,13 +73,13 @@ public class Appointment extends Treatment {
 
     @Override
     public String toString() {
-        String date = getStartTime().getDayOfMonth()+"."+getStartTime().getMonth()+"."+(getStartTime().getYear()+1900)+"." + " " + getStartTime().getHour() + ":" + getStartTime().getMinute();
-        String date2 = getEndTime().getDayOfMonth()+"."+getEndTime().getMonth()+"."+(getEndTime().getYear()+1900)+"." + " " + getEndTime().getHour() + ":" + getEndTime().getMinute();
+        String date = getStartTime().getDayOfMonth()+"."+getStartTime().getMonth()+"."+(getStartTime().getYear())+"." + " " + getStartTime().getHour() + ":" + getStartTime().getMinute();
+        String date2 = getEndTime().getDayOfMonth()+"."+getEndTime().getMonth()+"."+(getEndTime().getYear())+"." + " " + getEndTime().getHour() + ":" + getEndTime().getMinute();
 
         return  this.getId() + "|"+
                 this.getName() + "|" +
                 this.getType() + "|" +
-                this.getPrice() +
+                this.getPrice() + "|" +
                 this.getDuration() + "|" +
                 this.getComestician0() + "|"+
                 this.getClient() + "|" +

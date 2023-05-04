@@ -44,8 +44,8 @@ public class AllWorkersWindow extends JFrame {
         this.btnUpdate.setPreferredSize(d);
 
         btnAdd.setBackground(new Color(214, 179, 171 ));
-        btnUpdate.setBackground(new Color(214, 179, 171 ));
         btnDelete.setBackground(new Color(214, 179, 171 ));
+        btnUpdate.setBackground(new Color(214, 179, 171 ));
 
 
         toolBar.add(btnAdd);
@@ -143,16 +143,21 @@ public class AllWorkersWindow extends JFrame {
                     if (izbor == JOptionPane.YES_OPTION) {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
                         String username = (String) dtm.getValueAt(selektovaniRed, 5);
-                        mainService.getMenagerService().removeWorker(username);
+                        //mainService.getMenagerService().removeWorker(username);
+                        Worker toBeDeleted = mainService.getWorkerService().getWorkerByUsername(username);
+                        mainRepository.getWorkerRepository().getWorkers().remove(toBeDeleted);
                         AllWorkersWindow.this.setVisible(false);
+                        dtm.fireTableDataChanged();
                         AllWorkersWindow allWorkers = new AllWorkersWindow(mainRepository, mainService, menager);
+                        dtm.fireTableDataChanged();
                         allWorkers.setVisible(true);
+                        dtm.fireTableDataChanged();
 
 
                     }
                 }
-                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
-                dtm1.fireTableDataChanged();
+//                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
+//                dtm1.fireTableDataChanged();
             }
 
 

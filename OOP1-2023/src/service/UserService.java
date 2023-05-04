@@ -24,6 +24,7 @@ public class UserService {
 
     public UserService(MainRepository mainRepository){
         this.mainRepository = mainRepository;
+        this.clientService = new ClientService(this.mainRepository);
     }
 
     public void registration(Client client){
@@ -34,7 +35,6 @@ public class UserService {
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        this.clientService = new ClientService(this.mainRepository);
         Client newClient;
         newClient = client;
         int randInt = new Random().nextInt();
@@ -85,11 +85,13 @@ public class UserService {
 
     }
     public void removeUser(String username){
+        Person toBeDeleted = new Person();
         for (Person p:this.mainRepository.getUserRepository().getUsers()){
             if(username.equalsIgnoreCase(p.getUsername())){
-                this.mainRepository.getUserRepository().getUsers().remove(p);
+                toBeDeleted = p;
             }
         }
+        this.mainRepository.getUserRepository().getUsers().remove(toBeDeleted);
     }
     public void addUser(Person user){
         this.mainRepository.getUserRepository().getUsers().add(user);

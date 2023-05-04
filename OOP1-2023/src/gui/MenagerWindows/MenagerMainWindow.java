@@ -3,6 +3,7 @@ package gui.MenagerWindows;
 import gui.ClientWindows.MyAppointmentsWindow;
 import gui.LoginWindow;
 import model.Menager;
+import model.Worker;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
 import service.*;
@@ -117,7 +118,7 @@ public class MenagerMainWindow extends JFrame {
         btnNewWorker.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddNewWorkerWindow uuk = new AddNewWorkerWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
+                AddNewWorkerWindow uuk = new AddNewWorkerWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), new Worker());
                 uuk.setVisible(true);
             }
         });

@@ -121,6 +121,7 @@ public class AddNewTreatmentWindow extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                AddNewTreatmentWindow.this.mainService.getMenagerService().addTreatment(treatment);
                 AddNewTreatmentWindow.this.dispose();
                 AddNewTreatmentWindow.this.setVisible(false);
 
