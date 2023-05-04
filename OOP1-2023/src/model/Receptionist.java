@@ -33,7 +33,7 @@ public class Receptionist extends Worker {
         return  this.getId() + "|"+
                 this.getName() + "|" +
                 this.getLastname() + "|" +
-                this.getGender() +
+                this.getGender() + "|" +
                 this.getTelephone() + "|" +
                 this.getAddress() + "|" +
                 this.getUsername() + "|" +
