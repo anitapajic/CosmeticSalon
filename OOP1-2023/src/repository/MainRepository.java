@@ -1,5 +1,7 @@
 package repository;
 
+import model.Salon;
+
 import java.io.File;
 
 public class MainRepository {
@@ -11,10 +13,12 @@ public class MainRepository {
     private AppointmentRepository appointmentRepository;
     private UserRepository userRepository;
     private WorkerRepository workerRepository;
+    private Salon salon;
 
     public MainRepository(){}
 
-    public MainRepository(WorkerRepository workerRepository, UserRepository userRepository, ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository, TreatmentsRepository treatmentsRepository, AppointmentRepository appointmentRepository){
+    public MainRepository(Salon salon, WorkerRepository workerRepository, UserRepository userRepository, ClientRepository clientRepository, CosmeticianRepository cosmeticianRepository, RecepcionistRepository recepcionistRepository, MenagerRepository menagerRepository, TreatmentsRepository treatmentsRepository, AppointmentRepository appointmentRepository){
+        this.salon = salon;
         this.workerRepository = workerRepository;
         this.userRepository = userRepository;
         this.clientRepository = clientRepository;
@@ -49,6 +53,14 @@ public class MainRepository {
 
         File file8 = new File("src/data/appointments.csv");
         utils.WriteToFile.write(file8, this.getAppointmentRepository().getAppointments());
+    }
+
+    public Salon getSalon() {
+        return salon;
+    }
+
+    public void setSalon(Salon salon) {
+        this.salon = salon;
     }
 
     public ClientRepository getClientRepository() {

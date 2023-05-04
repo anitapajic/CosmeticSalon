@@ -3,6 +3,7 @@ package gui.MenagerWindows;
 import gui.ClientWindows.MyAppointmentsWindow;
 import gui.LoginWindow;
 import model.Menager;
+import model.Salon;
 import model.Worker;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
@@ -21,7 +22,7 @@ public class MenagerMainWindow extends JFrame {
     private JButton btnAllWorkers = new JButton("All workers");
     private JButton btnNewWorker = new JButton("Add new worker");
     private JButton btnTreatments = new JButton("Treatments");
-    private JButton btnPriceList = new JButton("Price list");
+    private JButton btnSalon = new JButton("Salon");
     private JButton btnLogout = new JButton("Log Out");
 
 
@@ -50,8 +51,8 @@ public class MenagerMainWindow extends JFrame {
         Dimension d = new Dimension(250,30);
         this.btnAllWorkers.setPreferredSize(d);
         this.btnNewWorker.setPreferredSize(d);
-        this.btnPriceList.setPreferredSize(d);
         this.btnTreatments.setPreferredSize(d);
+        this.btnSalon.setPreferredSize(d);
         this.btnLogout.setPreferredSize(d);
     }
 
@@ -62,7 +63,7 @@ public class MenagerMainWindow extends JFrame {
         panelZapad.add(this.btnAllWorkers, "wrap");
         panelZapad.add(this.btnNewWorker, "wrap");
         panelZapad.add(this.btnTreatments, "wrap");
-        panelZapad.add(this.btnPriceList, "wrap");
+        panelZapad.add(this.btnSalon, "wrap");
         panelZapad.add(this.btnLogout, "wrap");
 
 
@@ -130,19 +131,21 @@ public class MenagerMainWindow extends JFrame {
                 uut.setVisible(true);
             }
         });
-//        btnPriceList.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                PriceList priceList = new PriceList(userRepository, guest);
-//                priceList.setVisible(true);
-//            }
-//        });
+
         btnTreatments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CRUDTreatmentsWindow uut = new CRUDTreatmentsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
 
                 uut.setVisible(true);
+            }
+        });
+
+        btnSalon.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SalonSetUpWindow salonSetUpWindow = new SalonSetUpWindow(mainRepository.getSalon(), mainRepository, menager);
+                salonSetUpWindow.setVisible(true);
             }
         });
     }
