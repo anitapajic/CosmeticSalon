@@ -1,6 +1,7 @@
 package service;
 
 import model.*;
+import model.Enum.TreatmentStatus;
 import repository.CosmeticianRepository;
 import repository.MainRepository;
 
@@ -28,19 +29,19 @@ public class CosmeticianService {
         this.mainRepository.getCosmeticianRepository().getCosmeticians().add(c);
     }
     public void removeCosmetician(String username){
+        Cosmetician toBeDeleted = new Cosmetician();
         for (Cosmetician p:this.mainRepository.getCosmeticianRepository().getCosmeticians()){
             if(username.equalsIgnoreCase(p.getUsername())){
-                this.mainRepository.getCosmeticianRepository().getCosmeticians().remove(p);
-                JOptionPane.showMessageDialog(null, "You successfully fired cosmetician.", "Information!",
-                        JOptionPane.INFORMATION_MESSAGE);
+                toBeDeleted = p;
             }
         }
+        this.mainRepository.getCosmeticianRepository().getCosmeticians().remove(toBeDeleted);
     }
 
     public ArrayList<Appointment> getCosmeticianSchedule(String username){
         ArrayList<Appointment> appointments = new ArrayList<>();
         for(Appointment a:this.mainRepository.getAppointmentRepository().getAppointments()){
-            if(a.getCosmetician().equals(username)){
+            if(a.getCosmetician().equals(username)&&a.getStatus().equals(TreatmentStatus.SCHEDULED)){
                 appointments.add(a);
             }
         }

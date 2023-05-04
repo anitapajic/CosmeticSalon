@@ -121,9 +121,11 @@ public class AllAppointmentsWindow extends JFrame {
                     DefaultTableModel dtm = (DefaultTableModel) table.getModel();
                     String id = (String) dtm.getValueAt(selektovaniRed, 0);
                     Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
-                    AllAppointmentsWindow.this.mainService.getAppointmentService().deleteAppointment(z);
+                    mainRepository.getAppointmentRepository().getAppointments().remove(z);
                     AllAppointmentsWindow.this.setVisible(false);
+                    dtm.fireTableDataChanged();
                     UpdateAppointmentWindow updateAppointmentWindow = new UpdateAppointmentWindow(mainRepository, mainService, z);
+                    dtm.fireTableDataChanged();
                     updateAppointmentWindow.setVisible(true);
                     dtm.fireTableDataChanged();
 
@@ -144,18 +146,20 @@ public class AllAppointmentsWindow extends JFrame {
                             JOptionPane.YES_NO_OPTION);
                     if (izbor == JOptionPane.YES_OPTION) {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-                        Integer id = (Integer) dtm.getValueAt(selektovaniRed, 0);
-                        Appointment z = mainService.getAppointmentService().getAppointmentById(id);
-                        mainService.getAppointmentService().deleteAppointment(z);
+                        String id = (String) dtm.getValueAt(selektovaniRed, 0);
+                        Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
+                        mainRepository.getAppointmentRepository().getAppointments().remove(z);
                         AllAppointmentsWindow.this.setVisible(false);
+                        dtm.fireTableDataChanged();
                         AllAppointmentsWindow allWorkers = new AllAppointmentsWindow(mainRepository, mainService, receptionist);
+                        dtm.fireTableDataChanged();
                         allWorkers.setVisible(true);
+                        dtm.fireTableDataChanged();
 
 
                     }
                 }
-                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
-                dtm1.fireTableDataChanged();
+
             }
 
 

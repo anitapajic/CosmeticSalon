@@ -83,6 +83,7 @@ public class UpdateAppointmentWindow extends JFrame {
             txtPrice.setText(String.valueOf(appointment.getPrice()));
             txtDuration.setText(String.valueOf(appointment.getDuration()));
             cbCosmetician.setSelectedItem(appointment.getCosmetician());
+            txtClient.setText(appointment.getClient());
             txtStartTime.setText(String.valueOf(appointment.getStartTime()));
             txtEndTime.setText(String.valueOf(appointment.getEndTime()));
             cbStatus.setSelectedItem(appointment.getStatus());
@@ -168,6 +169,7 @@ public class UpdateAppointmentWindow extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                UpdateAppointmentWindow.this.mainService.getAppointmentService().addAppointment(appointment);
                 UpdateAppointmentWindow.this.dispose();
                 UpdateAppointmentWindow.this.setVisible(false);
 

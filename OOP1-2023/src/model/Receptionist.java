@@ -27,6 +27,22 @@ public class Receptionist extends Worker {
         this.setAddress(u.getAddress());
         this.setUsername(u.getUsername());
         this.setPassword(u.getPassword());
+        this.setRole(u.getRole());
+    }
+    public Receptionist(Worker u) {
+        this.setId(u.getId());
+        this.setName(u.getName());
+        this.setLastname(u.getLastname());
+        this.setGender(u.getGender());
+        this.setTelephone(u.getTelephone());
+        this.setAddress(u.getAddress());
+        this.setUsername(u.getUsername());
+        this.setPassword(u.getPassword());
+        this.setRole(u.getRole());
+        this.setEducoef(u.getEducoef());
+        this.setYearsOfService(u.getYearsOfService());
+        this.setBonus(u.getBonus());
+        this.setSalary(u.getSalary());
     }
     @Override
     public String toString() {

@@ -134,18 +134,22 @@ public class CRUDTreatmentsWindow extends JFrame {
                             JOptionPane.YES_NO_OPTION);
                     if (izbor == JOptionPane.YES_OPTION) {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-                        Integer id = (Integer) dtm.getValueAt(selektovaniRed, 0);
-                        Treatment z = mainService.getTreatmentService().getTreatmentById(id);
-                        mainService.getMenagerService().deleteTreatment(id);
+                        String id = (String) dtm.getValueAt(selektovaniRed, 0);
+                        Treatment z = mainService.getTreatmentService().getTreatmentById(Integer.valueOf(id));
+                        //mainService.getMenagerService().deleteTreatment(id);
+                        mainRepository.getTreatmentsRepository().getTreatmentsList().remove(z);
                         CRUDTreatmentsWindow.this.setVisible(false);
+                        dtm.fireTableDataChanged();
                         CRUDTreatmentsWindow allWorkers = new CRUDTreatmentsWindow(mainRepository, mainService, menager);
+                        dtm.fireTableDataChanged();
                         allWorkers.setVisible(true);
+                        dtm.fireTableDataChanged();
 
 
                     }
                 }
-                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
-                dtm1.fireTableDataChanged();
+//                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
+//                dtm1.fireTableDataChanged();
             }
 
 

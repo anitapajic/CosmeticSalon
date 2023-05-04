@@ -30,13 +30,13 @@ public class RecepcionistService {
         this.mainRepository.getRecepcionistRepository().getRecepcionists().add(c);
     }
     public void removeRecepcionist(String username){
+        Receptionist toBeDeleted = new Receptionist();
         for (Receptionist p:this.mainRepository.getRecepcionistRepository().getRecepcionists()){
             if(username.equalsIgnoreCase(p.getUsername())){
-                this.mainRepository.getRecepcionistRepository().getRecepcionists().remove(p);
-                JOptionPane.showMessageDialog(null, "You successfully fired recepcionist.", "Information!",
-                        JOptionPane.INFORMATION_MESSAGE);
+                toBeDeleted = p;
             }
         }
+        this.mainRepository.getRecepcionistRepository().getRecepcionists().remove(toBeDeleted);
     }
 
     public ArrayList<Appointment> getAllAppointments(){

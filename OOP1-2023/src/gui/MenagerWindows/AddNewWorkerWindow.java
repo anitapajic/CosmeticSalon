@@ -14,8 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 public class AddNewWorkerWindow extends JFrame {
     private MainRepository mainRepository;
@@ -130,8 +129,10 @@ public class AddNewWorkerWindow extends JFrame {
             this.worker.setPassword(txtPassword.getText());
             this.worker.setRole((Role) cbRole.getSelectedItem());
             this.worker.setEducoef((EduCoef) cbPQL.getSelectedItem());
-            this.worker.setSalary(Double.parseDouble(txtSallary.getText()));
             this.worker.setYearsOfService(Double.parseDouble(txtYearsOfService.getText()));
+            this.worker.setBonus(0.0);
+            this.worker.setSalary(Double.parseDouble(txtSallary.getText()));
+
 
             AddNewWorkerWindow.this.mainService.getMenagerService().addWorker(worker);
             this.setVisible(false);

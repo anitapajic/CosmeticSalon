@@ -18,6 +18,10 @@ public class MenagerService {
 
     public MenagerService(MainRepository mainRepository){
         this.mainRepository = mainRepository;
+        this.userService = new UserService(mainRepository);
+        this.clientService = new ClientService(mainRepository);
+        this.cosmeticianService = new CosmeticianService(mainRepository);
+        this.recepcionistService = new RecepcionistService(mainRepository);
     }
 
     public ArrayList<Worker> getWorkers(){
@@ -31,17 +35,17 @@ public class MenagerService {
         newWorker.setId(randInt);
 
         if(newWorker.getRole().equals(Role.COSMETICIAN)){
-            Cosmetician cosmetician = (Cosmetician) newWorker;
+            Cosmetician cosmetician = new Cosmetician(newWorker);
             this.cosmeticianService.addCosmetician(cosmetician);
 
         }
         else if(newWorker.getRole().equals(Role.RECEPCIONIST)){
-            Receptionist receptionist = (Receptionist) newWorker;
+            Receptionist receptionist = new Receptionist(newWorker);
             this.recepcionistService.addRecepcionist(receptionist);
 
         }
         else if (newWorker.getRole().equals(Role.MENAGER)) {
-            Menager menager  = (Menager) newWorker;
+            Menager menager  = new Menager(newWorker);
             mainRepository.getMenagerRepository().getMenagers().add(menager);
         }
         Person user = newWorker;
@@ -79,7 +83,13 @@ public class MenagerService {
     }
 
     public void deleteTreatment(Integer id){
-        this.mainRepository.getTreatmentsRepository().getTreatmentsList().removeIf(t -> t.getId().equals(id));
+        Treatment toBeDeleted = new Treatment();
+        for(Treatment t: mainRepository.getTreatmentsRepository().getTreatmentsList()){
+            if(t.getId().equals(id)){
+                toBeDeleted = t;
+            }
+        }
+        this.mainRepository.getTreatmentsRepository().getTreatmentsList().remove(toBeDeleted);
     }
 
     public void addTreatment(Treatment treatment){
