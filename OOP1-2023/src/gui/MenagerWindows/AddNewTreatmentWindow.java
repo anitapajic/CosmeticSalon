@@ -36,7 +36,7 @@ public class AddNewTreatmentWindow extends JFrame {
     private final JTextField txtDuration = new JTextField(20);
 
     private final JLabel cosmetician = new JLabel("Cosmetician:");
-    private String[] cosmeticians = {"ana@cosmetician.com", "marija@cosmetician.com"};
+    private String[] cosmeticians = {"sima@cosmetician.com", "jovana@cosmetician.com"};
     private final JComboBox<String> cbCosmetician = new JComboBox<>(cosmeticians);
 
     private final JButton btnOk = new JButton("Submit");
