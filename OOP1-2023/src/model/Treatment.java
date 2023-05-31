@@ -2,6 +2,8 @@ package model;
 
 import model.Enum.TreatmentType;
 
+import java.util.List;
+
 
 public class Treatment {
     private Integer id;
@@ -9,17 +11,17 @@ public class Treatment {
     private TreatmentType type;
     private Double price;
     private Integer duration;
-    private String comestician;
+    private List<Integer> comesticians;
 
 
 
-    public Treatment(Integer id, String name, TreatmentType type, Double price, Integer duration, String cosmetician) {
+    public Treatment(Integer id, String name, TreatmentType type, Double price, Integer duration, List<Integer> cosmeticians) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.price = price;
         this.duration = duration;
-        this.comestician = cosmetician;
+        this.comesticians = cosmeticians;
     }
 
     public Treatment(){}
@@ -63,12 +65,12 @@ public class Treatment {
         this.duration = duration;
     }
 
-    public String getComestician0() {
-        return comestician;
+    public List<Integer> getComesticians() {
+        return comesticians;
     }
 
-    public void setComestician0(String comestician) {
-        this.comestician = comestician;
+    public void setComesticians(List<Integer> comesticians) {
+        this.comesticians = comesticians;
     }
 
     @Override
@@ -78,7 +80,7 @@ public class Treatment {
                 this.getType() + "|" +
                 this.getPrice() + "|" +
                 this.getDuration() + "|" +
-                this.getComestician0() + "\n";
+                this.getComesticians() + "\n";
 
     }
 }

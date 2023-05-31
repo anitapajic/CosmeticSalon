@@ -3,6 +3,7 @@ package gui.RecepcionistWindows;
 import gui.MenagerWindows.AddNewWorkerWindow;
 import gui.MenagerWindows.AllWorkersWindow;
 import model.Appointment;
+import model.Cosmetician;
 import model.Enum.*;
 import model.Menager;
 import model.Receptionist;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 
 public class UpdateAppointmentWindow extends JFrame {
     private MainRepository mainRepository;
@@ -40,7 +42,7 @@ public class UpdateAppointmentWindow extends JFrame {
     private final JTextField txtDuration = new JTextField(20);
 
     private final JLabel cosmetician = new JLabel("Cosmetician:");
-    private String[] cosmeticians = {"sima@cosmetician.com", "jovana@cosmetician.com"};
+    private String[] cosmeticians = {"sima@cosmetician.com", "jovana@cosmetician.com", "zika@cosmetician.com", "ana@cosmetician.com"};
     private final JComboBox<String> cbCosmetician = new JComboBox<>(cosmeticians);
 
     private final JLabel client = new JLabel("Client:");
@@ -82,7 +84,8 @@ public class UpdateAppointmentWindow extends JFrame {
             cbType.setSelectedItem(appointment.getType());
             txtPrice.setText(String.valueOf(appointment.getPrice()));
             txtDuration.setText(String.valueOf(appointment.getDuration()));
-            cbCosmetician.setSelectedItem(appointment.getCosmetician());
+            Cosmetician cosmetician1 = mainRepository.getCosmeticianRepository().GetCosmeticianById(appointment.getCosmeticianId());
+            cbCosmetician.setSelectedItem(cosmetician1.getUsername());
             txtClient.setText(appointment.getClient());
             txtStartTime.setText(String.valueOf(appointment.getStartTime()));
             txtEndTime.setText(String.valueOf(appointment.getEndTime()));
@@ -124,9 +127,12 @@ public class UpdateAppointmentWindow extends JFrame {
             this.appointment.setType((TreatmentType) cbType.getSelectedItem());
             this.appointment.setPrice(Double.valueOf(txtPrice.getText()));
             this.appointment.setDuration(Integer.valueOf(txtDuration.getText()));
-            this.appointment.setComestician0((String) cbCosmetician.getSelectedItem());
+            String chosenCosmUsername = (String) cbCosmetician.getSelectedItem();
+            Cosmetician cosm = mainRepository.getCosmeticianRepository().GetCosmeticianByUsername(chosenCosmUsername);
+            this.appointment.setComesticians(Collections.singletonList(cosm.getId()));
             this.appointment.setClient(txtClient.getText());
-            this.appointment.setCosmetician((String) cbCosmetician.getSelectedItem());
+            Cosmetician cosmetician1 = mainRepository.getCosmeticianRepository().GetCosmeticianByUsername((String) cbCosmetician.getSelectedItem());
+            this.appointment.setCosmeticianId(cosmetician1.getId());
             LocalDateTime startDate = null;
             try {
                 startDate = LocalDateTime.parse(txtStartTime.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));

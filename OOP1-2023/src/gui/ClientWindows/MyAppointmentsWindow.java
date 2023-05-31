@@ -69,7 +69,8 @@ public class MyAppointmentsWindow extends JFrame {
             zahtevi[i][2] = String.valueOf(appointments.get(i).getType());
             zahtevi[i][3] = String.valueOf(appointments.get(i).getPrice());
             zahtevi[i][4] = String.valueOf(appointments.get(i).getDuration());
-            zahtevi[i][5] = appointments.get(i).getCosmetician();
+            String username = mainRepository.getCosmeticianRepository().GetCosmeticianById(appointments.get(i).getCosmeticianId()).getUsername();
+            zahtevi[i][5] = username;
             zahtevi[i][6] = String.valueOf(appointments.get(i).getStartTime());
             zahtevi[i][7] = String.valueOf(appointments.get(i).getEndTime());
             zahtevi[i][8] = String.valueOf(appointments.get(i).getStatus());

@@ -41,7 +41,7 @@ public class CosmeticianService {
     public ArrayList<Appointment> getCosmeticianSchedule(String username){
         ArrayList<Appointment> appointments = new ArrayList<>();
         for(Appointment a:this.mainRepository.getAppointmentRepository().getAppointments()){
-            if(a.getCosmetician().equals(username)&&a.getStatus().equals(TreatmentStatus.SCHEDULED)){
+            if(mainRepository.getCosmeticianRepository().GetCosmeticianById(a.getCosmeticianId()).getUsername().equals(username)&&a.getStatus().equals(TreatmentStatus.SCHEDULED)){
                 appointments.add(a);
             }
         }
@@ -50,9 +50,15 @@ public class CosmeticianService {
 
     public ArrayList<Treatment> getCosmeticianTreatments(String username){
         ArrayList<Treatment> treatments = new ArrayList<>();
+        ArrayList<Cosmetician> cosmeticians = new ArrayList<>();
         for(Treatment a:this.mainRepository.getTreatmentsRepository().getTreatmentsList()){
-            if(a.getComestician0().equals(username)){
-                treatments.add(a);
+            for(int i= 0; i < a.getComesticians().size(); i++){
+                cosmeticians.add(mainRepository.getCosmeticianRepository().GetCosmeticianById(i));
+            }
+            for(Cosmetician c : cosmeticians){
+                if(c.getUsername().equals(username)){
+                    treatments.add(a);
+                }
             }
         }
         return treatments;
