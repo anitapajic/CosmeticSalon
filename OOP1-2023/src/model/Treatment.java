@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Treatment {
     private Integer id;
-    private String name;
+    public String name;
     private TreatmentType type;
     private Double price;
     private Integer duration;

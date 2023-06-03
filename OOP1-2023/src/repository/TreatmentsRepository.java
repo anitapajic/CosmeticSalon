@@ -46,5 +46,14 @@ public class TreatmentsRepository {
     public ArrayList<Treatment> getTreatmentsList(){
         return this.treatments;
     }
+    public Treatment getTreatmentByName(String name){
+        Treatment treatment = new Treatment();
+        for(Treatment t: treatments){
+            if(t.getName().equals(name)){
+                treatment = t;
+            }
+        }
+        return treatment;
+    }
 
 }

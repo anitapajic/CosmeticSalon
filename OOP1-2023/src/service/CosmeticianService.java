@@ -6,6 +6,8 @@ import repository.CosmeticianRepository;
 import repository.MainRepository;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CosmeticianService {
@@ -62,5 +64,52 @@ public class CosmeticianService {
             }
         }
         return treatments;
+    }
+    public Cosmetician assignFreeCosmetician(String treatmentName, String startTime){
+        ArrayList<Cosmetician> cosmeticians = mainRepository.getCosmeticianRepository().getCosmeticians();
+        Cosmetician freeCosmetician = null;
+        LocalDateTime startDate;
+        try{
+            startDate = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
+            Treatment treatment = mainRepository.getTreatmentsRepository().getTreatmentByName(treatmentName);
+            LocalDateTime endDate = startDate.plusMinutes(treatment.getDuration());
+            for(Cosmetician cosmetician : cosmeticians){
+                if(isCosmeticianFree(cosmetician.getUsername(), startTime, treatmentName)){
+                    freeCosmetician = cosmetician;
+                    break;
+                }
+            }
+        }
+        catch (Exception e1) {
+            JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return freeCosmetician;
+    }
+    public Boolean isCosmeticianFree(String cosmeticianUsername, String startTime, String treatmentName){
+        Boolean free = false;
+        ArrayList<Appointment> scheduledApp = new ArrayList<>();
+        Treatment treatment = mainRepository.getTreatmentsRepository().getTreatmentByName(treatmentName);
+        LocalDateTime startDate;
+        try {
+            startDate = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
+            LocalDateTime endDate = startDate.plusMinutes(treatment.getDuration());
+            scheduledApp = getCosmeticianSchedule(cosmeticianUsername);
+            int overlapCount = 0;
+            for(Appointment appointment : scheduledApp){
+                if((startDate.isEqual(appointment.getStartTime()) || startDate.isAfter(appointment.getStartTime())) && startDate.isBefore(appointment.getEndTime())
+                        || (endDate.isAfter(appointment.getStartTime()) && (endDate.isBefore(appointment.getEndTime()) || endDate.isEqual(appointment.getEndTime())))){
+                    overlapCount++;
+                }
+            }
+            if (overlapCount == 0) {
+                free = true;
+            }
+        }
+            catch (Exception e1) {
+                JOptionPane.showMessageDialog(null, "Wrong date format!", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+        }
+
+        return free;
     }
 }
