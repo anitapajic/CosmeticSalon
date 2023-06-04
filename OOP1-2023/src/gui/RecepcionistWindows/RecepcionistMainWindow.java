@@ -1,6 +1,5 @@
 package gui.RecepcionistWindows;
 
-import gui.ClientWindows.MyAppointmentsWindow;
 import gui.LoginWindow;
 import model.Receptionist;
 import net.miginfocom.swing.MigLayout;
@@ -17,11 +16,10 @@ import java.awt.event.WindowEvent;
 public class RecepcionistMainWindow extends JFrame {
     MainRepository mainRepository;
     Receptionist receptionist;
-    private JButton btnMyAppointments = new JButton("Appointments");
-    private JButton btnMakeAppointment = new JButton("Make new appointment");
-    private JButton btnLogout = new JButton("Log Out");
+    private final JButton btnMyAppointments = new JButton("Appointments");
+    private final JButton btnMakeAppointment = new JButton("Make new appointment");
+    private final JButton btnLogout = new JButton("Log Out");
 
-    public RecepcionistMainWindow(){}
 
     public RecepcionistMainWindow(MainRepository mainRepository, Receptionist receptionist){
         this.mainRepository = mainRepository;
@@ -109,14 +107,13 @@ public class RecepcionistMainWindow extends JFrame {
             }
         });
 
-//        btnMakeAppointment.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Rezervacija reservation = new Rezervacija();
-//                GuestMakeReservation uuk = new GuestMakeReservation(userRepository, reservation);
-//                uuk.setVisible(true);
-//            }
-//        });
+        btnMakeAppointment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MakeAppointmentForClientWindow makeAppointmentForClientWindow = new MakeAppointmentForClientWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), receptionist);
+                makeAppointmentForClientWindow.setVisible(true);
+            }
+        });
         btnMyAppointments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

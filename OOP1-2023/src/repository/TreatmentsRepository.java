@@ -5,6 +5,7 @@ import model.Treatment;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static utils.ReadFromFile.read;
 
@@ -16,6 +17,7 @@ public class TreatmentsRepository {
         File treatmentsFile = new File("src/data/treatments.csv");
         ArrayList<Treatment> treatmentList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
+        ArrayList<Integer> ids = new ArrayList<>();
 
         try {
             read(treatmentsFile, x);
@@ -30,7 +32,11 @@ public class TreatmentsRepository {
             t.setType(TreatmentType.valueOf(k[2]));
             t.setPrice(Double.valueOf(k[3]));
             t.setDuration(Integer.valueOf(k[4]));
-            t.setComestician0(k[5]);
+            String[] id = k[5].split(",");
+            for(int i=0; i < id.length; i++){
+                ids.add(i);
+            }
+            t.setComesticians(ids);
             treatmentList.add(t);
 
         }
@@ -39,6 +45,15 @@ public class TreatmentsRepository {
 
     public ArrayList<Treatment> getTreatmentsList(){
         return this.treatments;
+    }
+    public Treatment getTreatmentByName(String name){
+        Treatment treatment = new Treatment();
+        for(Treatment t: treatments){
+            if(t.getName().equals(name)){
+                treatment = t;
+            }
+        }
+        return treatment;
     }
 
 }

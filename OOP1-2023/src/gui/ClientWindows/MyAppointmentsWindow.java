@@ -69,7 +69,8 @@ public class MyAppointmentsWindow extends JFrame {
             zahtevi[i][2] = String.valueOf(appointments.get(i).getType());
             zahtevi[i][3] = String.valueOf(appointments.get(i).getPrice());
             zahtevi[i][4] = String.valueOf(appointments.get(i).getDuration());
-            zahtevi[i][5] = appointments.get(i).getCosmetician();
+            String username = mainRepository.getCosmeticianRepository().GetCosmeticianById(appointments.get(i).getCosmeticianId()).getUsername();
+            zahtevi[i][5] = username;
             zahtevi[i][6] = String.valueOf(appointments.get(i).getStartTime());
             zahtevi[i][7] = String.valueOf(appointments.get(i).getEndTime());
             zahtevi[i][8] = String.valueOf(appointments.get(i).getStatus());
@@ -107,18 +108,24 @@ public class MyAppointmentsWindow extends JFrame {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
                         String id = (String) dtm.getValueAt(selektovaniRed, 0);
                         Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
+                        if(z.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().remove(z);
+                            appointments.remove(z);
 
-                        MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().remove(z);
-                        appointments.remove(z);
+                            z.setStatus(TreatmentStatus.CANCELED_BY_CLIENT);
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().add(z);
+                            appointments.add(z);
 
-                        z.setStatus(TreatmentStatus.CANCELED_BY_CLIENT);
-                        MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().add(z);
-                        appointments.add(z);
+                            setVisible(false);
 
-                        setVisible(false);
+                            MyAppointmentsWindow myReservationsWindow = new MyAppointmentsWindow(mainRepository, mainService, client);
+                            myReservationsWindow.setVisible(true);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "You can't cancel past appointments!", "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
 
-                        MyAppointmentsWindow myReservationsWindow = new MyAppointmentsWindow(mainRepository, mainService, client);
-                        myReservationsWindow.setVisible(true);
                     }
                 }
                 DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();

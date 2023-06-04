@@ -52,4 +52,14 @@ public class ClientRepository {
         return this.clients;
     }
 
+    public Client getClientByUsername(String username){
+        Client client = new Client();
+        for(Client c : clients){
+            if(c.getUsername().equals(username)){
+                client = c;
+            }
+        }
+        return client;
+    }
+
 }

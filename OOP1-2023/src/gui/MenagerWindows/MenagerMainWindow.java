@@ -19,11 +19,12 @@ import java.awt.event.WindowEvent;
 public class MenagerMainWindow extends JFrame {
     MainRepository mainRepository;
     Menager menager;
-    private JButton btnAllWorkers = new JButton("All workers");
-    private JButton btnNewWorker = new JButton("Add new worker");
-    private JButton btnTreatments = new JButton("Treatments");
-    private JButton btnSalon = new JButton("Salon");
-    private JButton btnLogout = new JButton("Log Out");
+    private final JButton btnAllWorkers = new JButton("All workers");
+    private final JButton btnNewWorker = new JButton("Add new worker");
+    private final JButton btnTreatments = new JButton("Treatments");
+    private final JButton btnSalon = new JButton("Salon");
+    private final JButton btnReports = new JButton("Reports");
+    private final JButton btnLogout = new JButton("Log Out");
 
 
     public MenagerMainWindow(){}
@@ -53,6 +54,7 @@ public class MenagerMainWindow extends JFrame {
         this.btnNewWorker.setPreferredSize(d);
         this.btnTreatments.setPreferredSize(d);
         this.btnSalon.setPreferredSize(d);
+        this.btnReports.setPreferredSize(d);
         this.btnLogout.setPreferredSize(d);
     }
 
@@ -64,6 +66,7 @@ public class MenagerMainWindow extends JFrame {
         panelZapad.add(this.btnNewWorker, "wrap");
         panelZapad.add(this.btnTreatments, "wrap");
         panelZapad.add(this.btnSalon, "wrap");
+        panelZapad.add(this.btnReports, "wrap");
         panelZapad.add(this.btnLogout, "wrap");
 
 
@@ -146,6 +149,14 @@ public class MenagerMainWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 SalonSetUpWindow salonSetUpWindow = new SalonSetUpWindow(mainRepository.getSalon(), mainRepository, menager);
                 salonSetUpWindow.setVisible(true);
+            }
+        });
+
+        btnReports.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ReportsWindow reportsWindow = new ReportsWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
+                reportsWindow.setVisible(true);
             }
         });
     }

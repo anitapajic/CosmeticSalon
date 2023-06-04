@@ -2,6 +2,7 @@ package gui.MenagerWindows;
 
 import gui.RecepcionistWindows.AllAppointmentsWindow;
 import gui.RecepcionistWindows.UpdateAppointmentWindow;
+import model.Cosmetician;
 import model.Enum.TreatmentType;
 import model.Menager;
 import model.Receptionist;
@@ -15,6 +16,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AddNewTreatmentWindow extends JFrame {
     private MainRepository mainRepository;
@@ -36,7 +38,7 @@ public class AddNewTreatmentWindow extends JFrame {
     private final JTextField txtDuration = new JTextField(20);
 
     private final JLabel cosmetician = new JLabel("Cosmetician:");
-    private String[] cosmeticians = {"ana@cosmetician.com", "marija@cosmetician.com"};
+    private String[] cosmeticians = {"sima@cosmetician.com", "jovana@cosmetician.com", "zika@cosmetician.com", "ana@cosmetician.com"};
     private final JComboBox<String> cbCosmetician = new JComboBox<>(cosmeticians);
 
     private final JButton btnOk = new JButton("Submit");
@@ -65,7 +67,8 @@ public class AddNewTreatmentWindow extends JFrame {
             cbType.setSelectedItem(treatment.getType());
             txtPrice.setText(String.valueOf(treatment.getPrice()));
             txtDuration.setText(String.valueOf(treatment.getDuration()));
-            cbCosmetician.setSelectedItem(treatment.getComestician0());
+            ///TODO : cosmeticians
+            //cbCosmetician.setSelectedItem(treatment.getComesticians());
 
         }
         this.setLayout(ml);
@@ -95,7 +98,10 @@ public class AddNewTreatmentWindow extends JFrame {
             this.treatment.setType((TreatmentType) cbType.getSelectedItem());
             this.treatment.setPrice(Double.valueOf(txtPrice.getText()));
             this.treatment.setDuration(Integer.valueOf(txtDuration.getText()));
-            this.treatment.setComestician0((String) cbCosmetician.getSelectedItem());
+
+            String chosenCosmUsername = (String) cbCosmetician.getSelectedItem();
+            Cosmetician cosmetician1 = mainRepository.getCosmeticianRepository().GetCosmeticianByUsername(chosenCosmUsername);
+            this.treatment.setComesticians(Collections.singletonList(cosmetician1.getId()));
 
             AddNewTreatmentWindow.this.mainService.getMenagerService().addTreatment(treatment);
             this.setVisible(false);

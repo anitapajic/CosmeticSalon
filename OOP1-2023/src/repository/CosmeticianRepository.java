@@ -50,4 +50,22 @@ public class CosmeticianRepository {
     public ArrayList<Cosmetician> getCosmeticians(){
         return this.cosmeticians;
     }
+    public Cosmetician GetCosmeticianById(Integer id){
+        Cosmetician cosmetician = new Cosmetician();
+        for(Cosmetician c : this.cosmeticians){
+            if(c.getId().equals(id)){
+                cosmetician = c;
+            }
+        }
+        return cosmetician;
+    }
+    public Cosmetician GetCosmeticianByUsername(String username){
+        Cosmetician cosmetician = new Cosmetician();
+        for(Cosmetician c : this.cosmeticians){
+            if(c.getUsername().equals(username)){
+                cosmetician = c;
+            }
+        }
+        return cosmetician;
+    }
 }

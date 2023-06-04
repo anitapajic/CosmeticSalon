@@ -1,5 +1,7 @@
 package gui;
 
+import model.Appointment;
+import model.Enum.TreatmentStatus;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
 import service.MainService;
@@ -8,6 +10,8 @@ import service.UserService;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class LoginWindow extends JFrame {
     JButton btnLogin = new JButton("Login");
@@ -36,6 +40,7 @@ public class LoginWindow extends JFrame {
         pack();
         setLocationRelativeTo(null);
         actions();
+        checkPastAppointments();
     }
 
     private void GUI() {
@@ -121,6 +126,15 @@ public class LoginWindow extends JFrame {
                 "End of work", JOptionPane.YES_NO_CANCEL_OPTION);
         if (option == JOptionPane.YES_OPTION) {
             System.exit(0);
+        }
+    }
+
+    public void checkPastAppointments(){
+        ArrayList<Appointment> appointments = mainRepository.getAppointmentRepository().getAppointments();
+        for(Appointment a : appointments){
+            if(a.getEndTime().isBefore(LocalDateTime.now()) && a.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                a.setStatus(TreatmentStatus.ACCOMPLISHED);
+            }
         }
     }
 

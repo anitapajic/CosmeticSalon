@@ -113,14 +113,13 @@ public class ClientMainWindow extends JFrame {
             }
         });
 
-//        btnMakeAppointment.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Rezervacija reservation = new Rezervacija();
-//                GuestMakeReservation uuk = new GuestMakeReservation(userRepository, reservation);
-//                uuk.setVisible(true);
-//            }
-//        });
+        btnMakeAppointment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MakeNewAppointmentWindow uuk = new MakeNewAppointmentWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), client);
+                uuk.setVisible(true);
+            }
+        });
         btnMyAppointments.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

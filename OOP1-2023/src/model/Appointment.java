@@ -4,27 +4,28 @@ import model.Enum.TreatmentStatus;
 import model.Enum.TreatmentType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Appointment extends Treatment {
 
     private String client;
-    private String cosmetician;
+    private Integer cosmeticianId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private TreatmentStatus status;
 
-    public Appointment(Integer id, String name, TreatmentType type, Double price, Integer duration, String cosmetician0, String client, String cosmetician, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
-        super(id, name, type, price, duration,cosmetician0);
+    public Appointment(Integer id, String name, TreatmentType type, Double price, Integer duration, List<Integer> cosmeticians, String client, Integer cosmeticianId, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
+        super(id, name, type, price, duration,cosmeticians);
         this.client = client;
-        this.cosmetician = cosmetician;
+        this.cosmeticianId = cosmeticianId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
     }
 
-    public Appointment(String client, String cosmetician, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
+    public Appointment(String client, Integer cosmeticianId, LocalDateTime startTime, LocalDateTime endTime, TreatmentStatus status) {
         this.client = client;
-        this.cosmetician = cosmetician;
+        this.cosmeticianId = cosmeticianId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
@@ -39,12 +40,12 @@ public class Appointment extends Treatment {
         this.client = client;
     }
 
-    public String getCosmetician() {
-        return cosmetician;
+    public Integer getCosmeticianId() {
+        return cosmeticianId;
     }
 
-    public void setCosmetician(String cosmetician) {
-        this.cosmetician = cosmetician;
+    public void setCosmeticianId(Integer cosmeticianId) {
+        this.cosmeticianId = cosmeticianId;
     }
 
     public LocalDateTime getStartTime() {
@@ -81,9 +82,9 @@ public class Appointment extends Treatment {
                 this.getType() + "|" +
                 this.getPrice() + "|" +
                 this.getDuration() + "|" +
-                this.getComestician0() + "|"+
+                this.getComesticians() + "|"+
                 this.getClient() + "|" +
-                this.getCosmetician() + "|" +
+                this.getCosmeticianId() + "|" +
                 date + "|" +
                 date2 + "|" +
                 this.getStatus() + "\n";

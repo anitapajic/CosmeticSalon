@@ -1,8 +1,13 @@
 package service;
 
 import model.Appointment;
+import model.Cosmetician;
+import model.Treatment;
 import repository.MainRepository;
 
+import javax.swing.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AppointmentService {
@@ -49,4 +54,5 @@ public class AppointmentService {
     public ArrayList<Appointment> getAppointments(){
         return mainRepository.getAppointmentRepository().getAppointments();
     }
+
 }
