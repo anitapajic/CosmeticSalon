@@ -22,7 +22,6 @@ public class AppointmentRepository {
         File treatmentsFile = new File("src/data/appointments.csv");
         ArrayList<Appointment> appointmentList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
-        ArrayList<Integer> ids = new ArrayList<>();
 
         try {
             read(treatmentsFile, x);
@@ -37,13 +36,15 @@ public class AppointmentRepository {
             t.setType(TreatmentType.valueOf(k[2]));
             t.setPrice(Double.valueOf(k[3]));
             t.setDuration(Integer.valueOf(k[4]));
-            String[] id = k[5].split(",");
-            for(int i=0; i < id.length; i++){
-                ids.add(i);
-            }
-            t.setComesticians(ids);
             t.setClient(k[6]);
             t.setCosmeticianId(Integer.valueOf(k[7]));
+            String[] ids = k[5].split(",");
+            List<Integer> cosmeticianIds = new ArrayList<>();
+            for (String id : ids) {
+                cosmeticianIds.add(Integer.valueOf(id));
+            }
+            t.setComesticians(cosmeticianIds);
+
 
             LocalDateTime date;
             date = LocalDateTime.parse(k[8], DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));

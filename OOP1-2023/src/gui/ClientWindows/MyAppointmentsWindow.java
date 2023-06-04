@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class MyAppointmentsWindow extends JFrame {
     private JTable table = new JTable();
     private  JButton btnCancel = new JButton("CANCEL");
+    private  JButton btnFinish = new JButton("FINISH");
     private JToolBar toolBar = new JToolBar();
     Client client;
     MainRepository mainRepository;
@@ -39,10 +40,14 @@ public class MyAppointmentsWindow extends JFrame {
     private void toolBar(){
         Dimension d = new Dimension(150,30);
         this.btnCancel.setPreferredSize(d);
+        this.btnFinish.setPreferredSize(d);
 
         btnCancel.setBackground(new Color(214, 179, 171 ));
+        btnFinish.setBackground(new Color(214, 179, 171 ));
+
 
         toolBar.add(btnCancel);
+        toolBar.add(btnFinish);
 
         getContentPane().add(toolBar, BorderLayout.NORTH);
     }
@@ -123,6 +128,46 @@ public class MyAppointmentsWindow extends JFrame {
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "You can't cancel past appointments!", "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+
+                    }
+                }
+                DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();
+                dtm1.fireTableDataChanged();
+            }
+
+        });
+
+        btnFinish.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovaniRed = table.getSelectedRow();
+                if (selektovaniRed == (-1)) {
+                    JOptionPane.showMessageDialog(null, "Please select a row!", "Error",
+                            JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    int izbor = JOptionPane.showConfirmDialog(null, "Did you finish your appointment?", "Confirmation",
+                            JOptionPane.YES_NO_OPTION);
+                    if (izbor == JOptionPane.YES_OPTION) {
+                        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+                        String id = (String) dtm.getValueAt(selektovaniRed, 0);
+                        Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
+                        if(z.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().remove(z);
+                            appointments.remove(z);
+
+                            z.setStatus(TreatmentStatus.ACCOMPLISHED);
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().add(z);
+                            appointments.add(z);
+
+                            setVisible(false);
+
+                            MyAppointmentsWindow myReservationsWindow = new MyAppointmentsWindow(mainRepository, mainService, client);
+                            myReservationsWindow.setVisible(true);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "You can't finish past appointments!", "Error",
                                     JOptionPane.INFORMATION_MESSAGE);
                         }
 

@@ -37,8 +37,8 @@ public class ClientRepository {
             m.setGender(Gender.valueOf(k[3]));
             m.setTelephone(k[4]);
             m.setAddress(k[5]);
-            m.setUsername(k[5]);
-            m.setPassword(k[6]);
+            m.setUsername(k[6]);
+            m.setPassword(k[7]);
             m.setRole(Role.CLIENT);
             m.setCardStatus(LoyalityCardStatus.valueOf(k[8]));
             m.setCardValue(Double.valueOf(k[9]));

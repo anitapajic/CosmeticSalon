@@ -41,9 +41,15 @@ public class CosmeticianService {
 
     public ArrayList<Appointment> getCosmeticianSchedule(String username){
         ArrayList<Appointment> appointments = new ArrayList<>();
-        for(Appointment a:this.mainRepository.getAppointmentRepository().getAppointments()){
-            if(mainRepository.getCosmeticianRepository().GetCosmeticianById(a.getCosmeticianId()).getUsername().equals(username)&&a.getStatus().equals(TreatmentStatus.SCHEDULED)){
-                appointments.add(a);
+        Cosmetician cosmetician = mainRepository.getCosmeticianRepository().GetCosmeticianByUsername(username);
+        if(cosmetician != null) {
+            ArrayList<Appointment> allAppointments = this.mainRepository.getAppointmentRepository().getAppointments();
+            if(allAppointments != null) {
+                for(Appointment a: allAppointments){
+                    if(a.getCosmeticianId().equals(cosmetician.getId()) && a.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                        appointments.add(a);
+                    }
+                }
             }
         }
         return appointments;
