@@ -100,7 +100,7 @@ public class MakeNewAppointmentWindow extends JFrame {
                    MakeNewAppointmentWindow.this.dispose();
                }
                else{
-                   setAppointmentWithCosm();
+                   setAppointmentWithCosm((String) cbCosmetician.getSelectedItem());
                    MakeNewAppointmentWindow.this.dispose();
                }
             }
@@ -115,7 +115,7 @@ public class MakeNewAppointmentWindow extends JFrame {
 
     public void setAppointmentWithoutCosm(){
         Appointment appointment = new Appointment();
-        Cosmetician cosmetician = mainService.getCosmeticianService().assignFreeCosmetician(cbType.getSelectedItem().toString(), txtStartTime.getText());
+        Cosmetician cosmetician = mainService.getCosmeticianService().assignFreeCosmetician((String) cbType.getSelectedItem(), txtStartTime.getText());
         Treatment t = mainRepository.getTreatmentsRepository().getTreatmentByName((String) cbType.getSelectedItem());
         try{
             LocalDateTime startTime;
@@ -140,10 +140,10 @@ public class MakeNewAppointmentWindow extends JFrame {
         }
     }
 
-    public void setAppointmentWithCosm(){
+    public void setAppointmentWithCosm(String username){
         Appointment appointment = new Appointment();
-        String cosmeticianUsername = (String) cbCosmetician.getSelectedItem();
-        if(mainService.getCosmeticianService().isCosmeticianFree(cosmeticianUsername, txtStartTime.getText(),(String) cbType.getSelectedItem())){
+        Cosmetician cosmetician = mainRepository.getCosmeticianRepository().GetCosmeticianByUsername(username);
+        if(mainService.getCosmeticianService().isCosmeticianFree(username, txtStartTime.getText(),(String) cbType.getSelectedItem())){
             Treatment t = mainRepository.getTreatmentsRepository().getTreatmentByName((String) cbType.getSelectedItem());
             try{
                 LocalDateTime startTime;
@@ -152,6 +152,7 @@ public class MakeNewAppointmentWindow extends JFrame {
                 LocalDateTime endDate = startTime.plusMinutes(t.getDuration());
                 appointment.setEndTime(endDate);
 
+                appointment.setCosmeticianId(cosmetician.getId());
                 appointment.setClient(client.getUsername());
                 appointment.setType(t.getType());
                 appointment.setPrice(t.getPrice());

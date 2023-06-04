@@ -17,7 +17,6 @@ public class TreatmentsRepository {
         File treatmentsFile = new File("src/data/treatments.csv");
         ArrayList<Treatment> treatmentList = new ArrayList<>();
         ArrayList<String[]> x = new ArrayList<String[]>();
-        ArrayList<Integer> ids = new ArrayList<>();
 
         try {
             read(treatmentsFile, x);
@@ -32,11 +31,13 @@ public class TreatmentsRepository {
             t.setType(TreatmentType.valueOf(k[2]));
             t.setPrice(Double.valueOf(k[3]));
             t.setDuration(Integer.valueOf(k[4]));
-            String[] id = k[5].split(",");
-            for(int i=0; i < id.length; i++){
-                ids.add(i);
+            String[] ids = k[5].split(",");
+            List<Integer> cosmeticianIds = new ArrayList<>();
+            for (String id : ids) {
+                cosmeticianIds.add(Integer.valueOf(id));
             }
-            t.setComesticians(ids);
+            t.setComesticians(cosmeticianIds);
+
             treatmentList.add(t);
 
         }
