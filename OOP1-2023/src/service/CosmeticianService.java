@@ -2,7 +2,6 @@ package service;
 
 import model.*;
 import model.Enum.TreatmentStatus;
-import repository.CosmeticianRepository;
 import repository.MainRepository;
 
 import javax.swing.*;
@@ -68,26 +67,17 @@ public class CosmeticianService {
     public Cosmetician assignFreeCosmetician(String treatmentName, String startTime){
         ArrayList<Cosmetician> cosmeticians = mainRepository.getCosmeticianRepository().getCosmeticians();
         Cosmetician freeCosmetician = null;
-        LocalDateTime startDate;
-        try{
-            startDate = LocalDateTime.parse(startTime, DateTimeFormatter.ofPattern("dd.MM.yyyy. HH:mm"));
-            Treatment treatment = mainRepository.getTreatmentsRepository().getTreatmentByName(treatmentName);
-            LocalDateTime endDate = startDate.plusMinutes(treatment.getDuration());
-            for(Cosmetician cosmetician : cosmeticians){
-                if(isCosmeticianFree(cosmetician.getUsername(), startTime, treatmentName)){
-                    freeCosmetician = cosmetician;
-                    break;
-                }
+        for(Cosmetician cosmetician : cosmeticians){
+            if(isCosmeticianFree(cosmetician.getUsername(), startTime, treatmentName)){
+                freeCosmetician = cosmetician;
+                break;
             }
-        }
-        catch (Exception e1) {
-            JOptionPane.showMessageDialog(null, "Error!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         return freeCosmetician;
     }
     public Boolean isCosmeticianFree(String cosmeticianUsername, String startTime, String treatmentName){
         Boolean free = false;
-        ArrayList<Appointment> scheduledApp = new ArrayList<>();
+        ArrayList<Appointment> scheduledApp;
         Treatment treatment = mainRepository.getTreatmentsRepository().getTreatmentByName(treatmentName);
         LocalDateTime startDate;
         try {

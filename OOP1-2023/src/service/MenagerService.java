@@ -2,6 +2,7 @@ package service;
 
 import model.*;
 import model.Enum.Role;
+import model.Enum.TreatmentStatus;
 import repository.MainRepository;
 import repository.MenagerRepository;
 
@@ -115,5 +116,23 @@ public class MenagerService {
         this.mainRepository = mainRepository;
     }
 
+    public double getIncomeMonthly(int index){
+        int month = index + 1;
+        double income = 0;
+        for(Appointment appointment : mainRepository.getAppointmentRepository().getAppointments()){
+            if(appointment.getStatus().equals(TreatmentStatus.ACCOMPLISHED) && appointment.getStartTime().getMonthValue() == month){
+                income += appointment.getPrice();
+            }
+        }
+        return income;
+    }
+
+    public double getOutcomeMonthly(int index){
+        double outcome = 0;
+        for(Worker w : mainRepository.getWorkerRepository().getWorkers()){
+            outcome += w.getSalary();
+        }
+        return outcome;
+    }
 
 }

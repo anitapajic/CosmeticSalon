@@ -108,18 +108,24 @@ public class MyAppointmentsWindow extends JFrame {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
                         String id = (String) dtm.getValueAt(selektovaniRed, 0);
                         Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
+                        if(z.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().remove(z);
+                            appointments.remove(z);
 
-                        MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().remove(z);
-                        appointments.remove(z);
+                            z.setStatus(TreatmentStatus.CANCELED_BY_CLIENT);
+                            MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().add(z);
+                            appointments.add(z);
 
-                        z.setStatus(TreatmentStatus.CANCELED_BY_CLIENT);
-                        MyAppointmentsWindow.this.mainRepository.getAppointmentRepository().getAppointments().add(z);
-                        appointments.add(z);
+                            setVisible(false);
 
-                        setVisible(false);
+                            MyAppointmentsWindow myReservationsWindow = new MyAppointmentsWindow(mainRepository, mainService, client);
+                            myReservationsWindow.setVisible(true);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "You can't cancel past appointments!", "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
 
-                        MyAppointmentsWindow myReservationsWindow = new MyAppointmentsWindow(mainRepository, mainService, client);
-                        myReservationsWindow.setVisible(true);
                     }
                 }
                 DefaultTableModel dtm1 = (DefaultTableModel) table.getModel();

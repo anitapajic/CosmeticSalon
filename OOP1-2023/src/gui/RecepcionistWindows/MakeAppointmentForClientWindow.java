@@ -1,12 +1,8 @@
-package gui.ClientWindows;
+package gui.RecepcionistWindows;
 
-import gui.RecepcionistWindows.UpdateAppointmentWindow;
-import model.Appointment;
-import model.Client;
-import model.Cosmetician;
+import gui.ClientWindows.MakeNewAppointmentWindow;
+import model.*;
 import model.Enum.TreatmentStatus;
-import model.Enum.TreatmentType;
-import model.Treatment;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
 import service.MainService;
@@ -18,31 +14,35 @@ import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
-public class MakeNewAppointmentWindow extends JFrame {
-    Client client;
+public class MakeAppointmentForClientWindow extends JFrame {
+    Receptionist recepcionist;
     MainRepository mainRepository;
     MainService mainService;
     ArrayList<Treatment> treatments;
     ArrayList<Cosmetician> cosmeticians;
-    private JLabel type;
-    private JLabel cosm;
-    private JComboBox<String> cbType;
-    private JComboBox<String> cbCosmetician;
-    private JLabel startTime;
-    private JTextField txtStartTime;
+    private final JLabel type;
+    private final JLabel cosm;
+    private final JComboBox<String> cbType;
+    private final JComboBox<String> cbCosmetician;
+    private final JLabel startTime;
+    private final JTextField txtStartTime;
+    private final JLabel client;
+    private final JTextField txtClient;
     private final JButton btnOk = new JButton("Submit");
     private final JButton btnCancel = new JButton("Quit");
 
-    public MakeNewAppointmentWindow(MainRepository mainRepository, MainService mainService, Client client){
+    public MakeAppointmentForClientWindow(MainRepository mainRepository, MainService mainService, Receptionist receptionist){
         this.mainService = mainService;
         this.mainRepository = mainRepository;
-        this.client = client;
+        this.recepcionist = receptionist;
         treatments = mainRepository.getTreatmentsRepository().getTreatmentsList();
         cosmeticians = mainRepository.getCosmeticianRepository().getCosmeticians();
         String[] treatmentNames = new String[treatments.size()];
+
+        client = new JLabel("Client's username:");
+        txtClient = new JTextField(20);
 
         for (int i = 0; i < treatments.size(); i++) {
             Treatment treatment = treatments.get(i);
@@ -76,6 +76,8 @@ public class MakeNewAppointmentWindow extends JFrame {
         MigLayout ml = new MigLayout("wrap 2");
 
         this.setLayout(ml);
+        this.add(client);
+        this.add(txtClient);
         this.add(type);
         this.add(cbType);
         this.add(startTime);
@@ -92,23 +94,22 @@ public class MakeNewAppointmentWindow extends JFrame {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ///TODO : Add validation
                 int selectedIndex = cbCosmetician.getSelectedIndex();
-               if(selectedIndex == -1){
-                   setAppointmentWithoutCosm();
-                   JOptionPane.showMessageDialog(null, "You successfully made new appointment!", "Information", JOptionPane.INFORMATION_MESSAGE);
-                   MakeNewAppointmentWindow.this.dispose();
-               }
-               else{
-                   setAppointmentWithCosm();
-                   MakeNewAppointmentWindow.this.dispose();
-               }
+                if(selectedIndex == -1){
+                    setAppointmentWithoutCosm();
+                    JOptionPane.showMessageDialog(null, "You successfully made new appointment!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    MakeAppointmentForClientWindow.this.dispose();
+                }
+                else{
+                    setAppointmentWithCosm();
+                    MakeAppointmentForClientWindow.this.dispose();
+                }
             }
         });
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MakeNewAppointmentWindow.this.dispose();
+                MakeAppointmentForClientWindow.this.dispose();
             }
         });
     }
@@ -124,7 +125,7 @@ public class MakeNewAppointmentWindow extends JFrame {
             LocalDateTime endDate = startTime.plusMinutes(t.getDuration());
             appointment.setEndTime(endDate);
             appointment.setCosmeticianId(cosmetician.getId());
-            appointment.setClient(client.getUsername());
+            appointment.setClient(txtClient.getText());
             appointment.setType(t.getType());
             appointment.setPrice(t.getPrice());
             appointment.setName(t.getName());
@@ -152,7 +153,7 @@ public class MakeNewAppointmentWindow extends JFrame {
                 LocalDateTime endDate = startTime.plusMinutes(t.getDuration());
                 appointment.setEndTime(endDate);
 
-                appointment.setClient(client.getUsername());
+                appointment.setClient(txtClient.getText());
                 appointment.setType(t.getType());
                 appointment.setPrice(t.getPrice());
                 appointment.setName(t.getName());
@@ -175,5 +176,4 @@ public class MakeNewAppointmentWindow extends JFrame {
             JOptionPane.showMessageDialog(null, "Chosen cosmetician is unavailable!", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
 }

@@ -1,10 +1,8 @@
 package gui.RecepcionistWindows;
 
-import gui.MenagerWindows.AddNewWorkerWindow;
-import gui.MenagerWindows.AllWorkersWindow;
 import model.Appointment;
+import model.Enum.TreatmentStatus;
 import model.Receptionist;
-import model.Worker;
 import repository.MainRepository;
 import service.MainService;
 
@@ -19,12 +17,10 @@ public class AllAppointmentsWindow extends JFrame {
     private MainRepository mainRepository;
     private MainService mainService;
     private Receptionist receptionist;
+    private final JButton btnDelete = new JButton("Cancel");
+    private final JButton btnUpdate = new JButton("Update");
 
-    private JButton btnAdd = new JButton("Add");
-    private JButton btnDelete = new JButton("Delete");
-    private JButton btnUpdate = new JButton("Update");
-
-    private JToolBar toolBar = new JToolBar();
+    private final JToolBar toolBar = new JToolBar();
     private JTable table = new JTable();
 
     public AllAppointmentsWindow(MainRepository mainRepository, MainService mainService, Receptionist receptionist){
@@ -42,16 +38,13 @@ public class AllAppointmentsWindow extends JFrame {
     }
     private void toolBar(){
         Dimension d = new Dimension(150,30);
-        this.btnAdd.setPreferredSize(d);
         this.btnDelete.setPreferredSize(d);
         this.btnUpdate.setPreferredSize(d);
 
-        btnAdd.setBackground(new Color(214, 179, 171 ));
         btnUpdate.setBackground(new Color(214, 179, 171 ));
         btnDelete.setBackground(new Color(214, 179, 171 ));
 
 
-        toolBar.add(btnAdd);
         toolBar.add(btnDelete);
         toolBar.add(btnUpdate);
 
@@ -71,7 +64,6 @@ public class AllAppointmentsWindow extends JFrame {
 
         String[] zaglavlje = {"Id", "Name", "Treatment type", "Price", "Duration", "Client", "Cosmetician", "Start time", "End time", "Status"};
         String[][] matrica = tabela();
-
 
         DefaultTableModel dtm = new DefaultTableModel(matrica, zaglavlje);
         table = new JTable(dtm);
@@ -129,7 +121,6 @@ public class AllAppointmentsWindow extends JFrame {
                     dtm.fireTableDataChanged();
                     updateAppointmentWindow.setVisible(true);
                     dtm.fireTableDataChanged();
-
                 }
             }
         });
@@ -142,38 +133,29 @@ public class AllAppointmentsWindow extends JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-//
-                    int izbor = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this appointment?", "Confirmation",
+                    int izbor = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel this appointment?", "Confirmation",
                             JOptionPane.YES_NO_OPTION);
                     if (izbor == JOptionPane.YES_OPTION) {
                         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
                         String id = (String) dtm.getValueAt(selektovaniRed, 0);
                         Appointment z = mainService.getAppointmentService().getAppointmentById(Integer.valueOf(id));
-                        mainRepository.getAppointmentRepository().getAppointments().remove(z);
-                        AllAppointmentsWindow.this.setVisible(false);
-                        dtm.fireTableDataChanged();
-                        AllAppointmentsWindow allWorkers = new AllAppointmentsWindow(mainRepository, mainService, receptionist);
-                        dtm.fireTableDataChanged();
-                        allWorkers.setVisible(true);
-                        dtm.fireTableDataChanged();
-
-
+                        if(z.getStatus().equals(TreatmentStatus.SCHEDULED)){
+                            mainRepository.getAppointmentRepository().getAppointments().remove(z);
+                            z.setStatus(TreatmentStatus.CANCELED_BY_SALON);
+                            mainRepository.getAppointmentRepository().getAppointments().add(z);
+                            AllAppointmentsWindow.this.setVisible(false);
+                            dtm.fireTableDataChanged();
+                            AllAppointmentsWindow allWorkers = new AllAppointmentsWindow(mainRepository, mainService, receptionist);
+                            dtm.fireTableDataChanged();
+                            allWorkers.setVisible(true);
+                            dtm.fireTableDataChanged();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "You can't cancel past appointments!", "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
                     }
                 }
-
-            }
-
-
-        });
-
-        btnAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                UpdateAppointmentWindow adminDodajZaposlenog = new UpdateAppointmentWindow(mainRepository, mainService, new Appointment());
-                AllAppointmentsWindow.this.setVisible(false);
-                adminDodajZaposlenog.setVisible(true);
-                DefaultTableModel dtm = (DefaultTableModel) table.getModel();
-                dtm.fireTableDataChanged();
             }
         });
     }
