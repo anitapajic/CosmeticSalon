@@ -24,6 +24,7 @@ public class MenagerMainWindow extends JFrame {
     private final JButton btnTreatments = new JButton("Treatments");
     private final JButton btnSalon = new JButton("Salon");
     private final JButton btnReports = new JButton("Reports");
+    private final JButton btnCard = new JButton("Loyality card value");
     private final JButton btnLogout = new JButton("Log Out");
 
 
@@ -55,6 +56,7 @@ public class MenagerMainWindow extends JFrame {
         this.btnTreatments.setPreferredSize(d);
         this.btnSalon.setPreferredSize(d);
         this.btnReports.setPreferredSize(d);
+        this.btnCard.setPreferredSize(d);
         this.btnLogout.setPreferredSize(d);
     }
 
@@ -67,6 +69,7 @@ public class MenagerMainWindow extends JFrame {
         panelZapad.add(this.btnTreatments, "wrap");
         panelZapad.add(this.btnSalon, "wrap");
         panelZapad.add(this.btnReports, "wrap");
+        panelZapad.add(this.btnCard, "wrap");
         panelZapad.add(this.btnLogout, "wrap");
 
 
@@ -159,6 +162,14 @@ public class MenagerMainWindow extends JFrame {
                 reportsWindow.setVisible(true);
             }
         });
+        btnCard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoyalityCardValueWindow reportsWindow = new LoyalityCardValueWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), menager);
+                reportsWindow.setVisible(true);
+            }
+        });
     }
+
 
 }

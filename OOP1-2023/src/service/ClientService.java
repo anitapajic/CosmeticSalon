@@ -40,6 +40,16 @@ public class ClientService {
         return appointments;
     }
 
+    public double getSpentMoney(String username){
+        double spent = 0;
+        for(Appointment app:mainRepository.getAppointmentRepository().getAppointments()){
+            if(app.getClient().equals(username)){
+                spent += app.getPrice();
+            }
+        }
+        return spent;
+    }
+
 
 
 }

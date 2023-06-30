@@ -18,10 +18,8 @@ public class ClientMainWindow extends JFrame {
     private Client client;
     private JButton btnMyAppointments = new JButton("Appointments");
     private JButton btnMakeAppointment = new JButton("Make new appointment");
-    private JButton btnPriceList = new JButton("Price list");
+    private JButton btnPriceList = new JButton("Loyality card");
     private JButton btnLogout = new JButton("Log Out");
-    public ClientMainWindow(){}
-
 
 
     public ClientMainWindow(MainRepository mainRepository, Client client){
@@ -127,12 +125,12 @@ public class ClientMainWindow extends JFrame {
                 uut.setVisible(true);
             }
         });
-//        btnPriceList.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                PriceList priceList = new PriceList(userRepository, guest);
-//                priceList.setVisible(true);
-//            }
-//        });
+        btnPriceList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoyalityCardStatusWindow priceList = new LoyalityCardStatusWindow(mainRepository, new MainService(new WorkerService(mainRepository), new UserService(mainRepository), new ClientService(mainRepository), new MenagerService(mainRepository), new CosmeticianService(mainRepository), new RecepcionistService(mainRepository), new AppointmentService(mainRepository), new TreatmentService(mainRepository)), client);
+                priceList.setVisible(true);
+            }
+        });
     }
 }
