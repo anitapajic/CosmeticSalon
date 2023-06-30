@@ -24,8 +24,8 @@ public class IncomeOutcomeMonthly extends JFrame {
         Color[] sliceColors = new Color[] { new Color(114, 180, 235), new Color(173, 36, 107) };
         chart.getStyler().setSeriesColors(sliceColors);
 
-        chart.addSeries("Income", this.income);
-        chart.addSeries("Outcome", this.outcome);
+        chart.addSeries("Income = " + this.income, this.income);
+        chart.addSeries("Outcome = " + this.outcome, this.outcome);
 
 
 

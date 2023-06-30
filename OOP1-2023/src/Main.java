@@ -7,7 +7,6 @@ import service.*;
 public class Main {
     public static void main(String[] args) {
 
-        ///TODO : Test all
         Salon salon = new Salon("Initial name", "00h-00h");
 
         MainRepository mainRepository = new MainRepository(salon, new WorkerRepository(), new UserRepository(), new ClientRepository(), new CosmeticianRepository(), new RecepcionistRepository(),new MenagerRepository() , new TreatmentsRepository(), new AppointmentRepository());

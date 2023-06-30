@@ -2,6 +2,7 @@ package gui.RecepcionistWindows;
 
 import gui.ClientWindows.MakeNewAppointmentWindow;
 import model.*;
+import model.Enum.LoyalityCardStatus;
 import model.Enum.TreatmentStatus;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
@@ -127,7 +128,13 @@ public class MakeAppointmentForClientWindow extends JFrame {
             appointment.setCosmeticianId(cosmetician.getId());
             appointment.setClient(txtClient.getText());
             appointment.setType(t.getType());
-            appointment.setPrice(t.getPrice());
+            Client client = mainRepository.getClientRepository().getClientByUsername(txtClient.getText());
+            if(client.getCardStatus().equals(LoyalityCardStatus.YES)){
+                appointment.setPrice(t.getPrice()*0.9);
+            }
+            else{
+                appointment.setPrice(t.getPrice());
+            }
             appointment.setName(t.getName());
             appointment.setDuration(t.getDuration());
             appointment.setComesticians(t.getComesticians());
@@ -156,7 +163,13 @@ public class MakeAppointmentForClientWindow extends JFrame {
                 appointment.setCosmeticianId(cosmetician.getId());
                 appointment.setClient(txtClient.getText());
                 appointment.setType(t.getType());
-                appointment.setPrice(t.getPrice());
+                Client client = mainRepository.getClientRepository().getClientByUsername(txtClient.getText());
+                if(client.getCardStatus().equals(LoyalityCardStatus.YES)){
+                    appointment.setPrice(t.getPrice()*0.9);
+                }
+                else{
+                    appointment.setPrice(t.getPrice());
+                }
                 appointment.setName(t.getName());
                 appointment.setDuration(t.getDuration());
                 appointment.setComesticians(t.getComesticians());

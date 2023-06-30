@@ -7,6 +7,7 @@ import repository.MainRepository;
 import repository.MenagerRepository;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -134,5 +135,64 @@ public class MenagerService {
         }
         return outcome;
     }
+
+    public double getIncomeThisYear(){
+        double income = 0;
+        for(Appointment appointment : mainRepository.getAppointmentRepository().getAppointments()){
+            if(appointment.getStatus().equals(TreatmentStatus.ACCOMPLISHED)){
+                income += appointment.getPrice();
+            }
+        }
+        return income;
+    }
+
+    public double getOutcomeThisYear(){
+        double outcome = 0;
+        for(Worker w : mainRepository.getWorkerRepository().getWorkers()){
+            outcome += w.getSalary();
+        }
+        return outcome*(LocalDateTime.now().getMonthValue());
+    }
+
+    public int getNumOfAppForCosm(Cosmetician cosmetician){
+        int num = 0;
+        for(Appointment appointment : mainRepository.getAppointmentRepository().getAppointments()){
+            if(appointment.getStatus().equals(TreatmentStatus.ACCOMPLISHED) && appointment.getCosmeticianId().equals(cosmetician.getId())){
+                num += 1;
+            }
+        }
+        return num;
+    }
+
+    public int getIncomeForCosm(Cosmetician cosmetician){
+        int income = 0;
+        for(Appointment appointment : mainRepository.getAppointmentRepository().getAppointments()){
+            if(appointment.getStatus().equals(TreatmentStatus.ACCOMPLISHED) && appointment.getCosmeticianId().equals(cosmetician.getId())){
+                income += appointment.getPrice();
+            }
+        }
+        return income;
+    }
+
+    public int getNumOfAppByTreatment(Treatment treatment){
+        int num = 0;
+        for(Appointment app: mainRepository.getAppointmentRepository().getAppointments()){
+            if(app.getName().equals(treatment.getName())){
+                num += 1;
+            }
+        }
+        return num;
+    }
+
+    public int getIncomeByTreatment(Treatment treatment){
+        int income = 0;
+        for(Appointment app: mainRepository.getAppointmentRepository().getAppointments()){
+            if(app.getName().equals(treatment.getName())){
+                income += app.getPrice();
+            }
+        }
+        return income;
+    }
+
 
 }

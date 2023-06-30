@@ -4,6 +4,7 @@ import gui.RecepcionistWindows.UpdateAppointmentWindow;
 import model.Appointment;
 import model.Client;
 import model.Cosmetician;
+import model.Enum.LoyalityCardStatus;
 import model.Enum.TreatmentStatus;
 import model.Enum.TreatmentType;
 import model.Treatment;
@@ -126,7 +127,12 @@ public class MakeNewAppointmentWindow extends JFrame {
             appointment.setCosmeticianId(cosmetician.getId());
             appointment.setClient(client.getUsername());
             appointment.setType(t.getType());
-            appointment.setPrice(t.getPrice());
+            if(client.getCardStatus().equals(LoyalityCardStatus.YES)){
+                appointment.setPrice(t.getPrice()*0.9);
+            }
+            else{
+                appointment.setPrice(t.getPrice());
+            }
             appointment.setName(t.getName());
             appointment.setDuration(t.getDuration());
             appointment.setComesticians(t.getComesticians());
@@ -155,7 +161,13 @@ public class MakeNewAppointmentWindow extends JFrame {
                 appointment.setCosmeticianId(cosmetician.getId());
                 appointment.setClient(client.getUsername());
                 appointment.setType(t.getType());
-                appointment.setPrice(t.getPrice());
+
+                if(client.getCardStatus().equals(LoyalityCardStatus.YES)){
+                    appointment.setPrice(t.getPrice()*0.9);
+                }
+                else{
+                    appointment.setPrice(t.getPrice());
+                }
                 appointment.setName(t.getName());
                 appointment.setDuration(t.getDuration());
                 appointment.setComesticians(t.getComesticians());
