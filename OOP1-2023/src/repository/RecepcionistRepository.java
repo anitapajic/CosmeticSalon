@@ -49,6 +49,9 @@ public class RecepcionistRepository {
     public ArrayList<Receptionist> getRecepcionists(){
         return this.recepcionists;
     }
+    public void setRecepcionists(ArrayList<Receptionist> recepcionists){
+        this.recepcionists = recepcionists;
+    }
 }
 
 

@@ -33,11 +33,12 @@ public class UserService {
             if(c.getUsername().equals(client.getUsername())){
                 JOptionPane.showMessageDialog(null, "You are already registered. Please login.", "Notification",
                         JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
         }
         Client newClient;
         newClient = client;
-        int randInt = new Random().nextInt();
+        int randInt = new Random().nextInt(10000);
         newClient.setId(randInt);
         newClient.setCardValue(0.0);
         newClient.setCardStatus(LoyalityCardStatus.NO);

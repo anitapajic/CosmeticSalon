@@ -51,6 +51,9 @@ public class ClientRepository {
     public ArrayList<Client> getClients(){
         return this.clients;
     }
+    public void setClients(ArrayList<Client> clients){
+        this.clients = clients;
+    }
 
     public Client getClientByUsername(String username){
         Client client = new Client();

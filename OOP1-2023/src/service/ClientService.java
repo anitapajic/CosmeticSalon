@@ -15,17 +15,6 @@ public class ClientService {
     }
 
 
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
-
-
-
     public void addClient(Client client){
         this.mainRepository.getClientRepository().getClients().add(client);
     }

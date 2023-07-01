@@ -17,15 +17,6 @@ public class RecepcionistService {
         this.mainRepository = mainRepository;
     }
 
-
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
-
     public void addRecepcionist(Receptionist c){
         this.mainRepository.getRecepcionistRepository().getRecepcionists().add(c);
     }

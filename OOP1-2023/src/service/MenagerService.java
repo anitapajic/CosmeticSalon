@@ -9,6 +9,7 @@ import repository.MenagerRepository;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class MenagerService {
@@ -64,26 +65,6 @@ public class MenagerService {
 
     }
 
-    public void updateWorker(Worker worker){
-        if (worker.getRole().equals(Role.RECEPCIONIST)) {
-            for(Worker w : this.mainRepository.getRecepcionistRepository().getRecepcionists()){
-                if(w.getUsername().equals(worker.getUsername())){
-                    this.mainRepository.getRecepcionistRepository().getRecepcionists().remove(w);
-                    this.mainRepository.getRecepcionistRepository().getRecepcionists().add((Receptionist) worker);
-                }
-            }
-        }
-        else{
-            for(Worker w : this.mainRepository.getCosmeticianRepository().getCosmeticians()){
-                if(w.getUsername().equals(worker.getUsername())){
-                    this.mainRepository.getCosmeticianRepository().getCosmeticians().remove(w);
-                    this.mainRepository.getCosmeticianRepository().getCosmeticians().add((Cosmetician) worker);
-                }
-            }
-        }
-
-    }
-
     public void deleteTreatment(Integer id){
         Treatment toBeDeleted = new Treatment();
         for(Treatment t: mainRepository.getTreatmentsRepository().getTreatmentsList()){
@@ -97,24 +78,9 @@ public class MenagerService {
     public void addTreatment(Treatment treatment){
         this.mainRepository.getTreatmentsRepository().getTreatmentsList().add(treatment);
     }
-    public void updateTreatment(Treatment treatment){
-        for(Treatment t: this.mainRepository.getTreatmentsRepository().getTreatmentsList()){
-            if(t.getId().equals(treatment.getId())){
-                this.mainRepository.getTreatmentsRepository().getTreatmentsList().remove(t);
-                this.mainRepository.getTreatmentsRepository().getTreatmentsList().add(treatment);
-            }
-        }
-    }
+
     public ArrayList<Treatment> getTreatments(){
         return this.mainRepository.getTreatmentsRepository().getTreatmentsList();
-    }
-
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
     }
 
     public double getIncomeMonthly(int index){

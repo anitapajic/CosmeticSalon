@@ -47,4 +47,7 @@ public class UserRepository {
     public ArrayList<Person> getUsers(){
         return this.users;
     }
+    public void setUsers(ArrayList<Person> users){
+        this.users = users;
+    }
 }

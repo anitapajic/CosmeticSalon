@@ -13,15 +13,6 @@ public class TreatmentService {
         this.mainRepository = mainRepository;
     }
 
-
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
-
     public Treatment getTreatmentById(Integer id){
         Treatment appointment = new Treatment();
         for(Treatment app : mainRepository.getTreatmentsRepository().getTreatmentsList()){

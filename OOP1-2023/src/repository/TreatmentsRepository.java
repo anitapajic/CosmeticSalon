@@ -47,6 +47,10 @@ public class TreatmentsRepository {
     public ArrayList<Treatment> getTreatmentsList(){
         return this.treatments;
     }
+
+    public void setTreatmentsList(ArrayList<Treatment> treatments){
+        this.treatments = treatments;
+    }
     public Treatment getTreatmentByName(String name){
         Treatment treatment = new Treatment();
         for(Treatment t: treatments){

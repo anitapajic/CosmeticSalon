@@ -50,5 +50,8 @@ public class MenagerRepository {
     public ArrayList<Menager> getMenagers(){
         return this.menagers;
     }
+    public void setMenagers(ArrayList<Menager> menagers){
+        this.menagers = menagers;
+    }
 
 }
