@@ -50,6 +50,9 @@ public class CosmeticianRepository {
     public ArrayList<Cosmetician> getCosmeticians(){
         return this.cosmeticians;
     }
+    public void setCosmeticians(ArrayList<Cosmetician> cosmeticians){
+        this.cosmeticians = cosmeticians;
+    }
     public Cosmetician GetCosmeticianById(Integer id){
         Cosmetician cosmetician = new Cosmetician();
         for(Cosmetician c : this.cosmeticians){

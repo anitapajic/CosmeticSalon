@@ -10,14 +10,6 @@ public class WorkerService {
         this.mainRepository = mainRepository;
     }
 
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
-
     public Worker getWorkerByUsername(String username){
         Worker worker = new Worker();
         for(Worker w:mainRepository.getWorkerRepository().getWorkers()){

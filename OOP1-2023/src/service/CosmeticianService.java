@@ -17,15 +17,6 @@ public class CosmeticianService {
         this.mainRepository = mainRepository;
     }
 
-
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
-
     public void addCosmetician(Cosmetician c){
         this.mainRepository.getCosmeticianRepository().getCosmeticians().add(c);
     }

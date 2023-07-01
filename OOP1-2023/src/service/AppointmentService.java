@@ -1,13 +1,8 @@
 package service;
 
 import model.Appointment;
-import model.Cosmetician;
-import model.Treatment;
 import repository.MainRepository;
 
-import javax.swing.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AppointmentService {
@@ -15,15 +10,7 @@ public class AppointmentService {
     public AppointmentService(MainRepository mainRepository){
         this.mainRepository = mainRepository;
     }
-    public AppointmentService(){}
 
-    public MainRepository getMainRepository() {
-        return mainRepository;
-    }
-
-    public void setMainRepository(MainRepository mainRepository) {
-        this.mainRepository = mainRepository;
-    }
 
     public Appointment getAppointmentById(Integer id){
         Appointment appointment = new Appointment();

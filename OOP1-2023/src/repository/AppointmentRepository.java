@@ -64,4 +64,7 @@ public class AppointmentRepository {
     public ArrayList<Appointment> getAppointments(){
         return this.appointments;
     }
+    public void setAppointments(ArrayList<Appointment> appointments){
+        this.appointments = appointments;
+    }
 }

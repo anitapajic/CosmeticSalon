@@ -50,4 +50,7 @@ public class WorkerRepository {
     public ArrayList<Worker> getWorkers(){
         return this.workers;
     }
+    public void setWorkers(ArrayList<Worker> workers){
+        this.workers = workers;
+    }
 }
