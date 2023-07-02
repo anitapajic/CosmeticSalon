@@ -32,4 +32,20 @@ public class WorkerServiceTest {
 
         Assertions.assertEquals(worker, result);
     }
+    @Test
+    public void testGetWorkerByUsername_workerDoesNotExist_returnsNull() {
+        // Arrange
+        Worker worker = new Worker();
+        worker.setUsername("username");
+
+        ArrayList<Worker> workers = new ArrayList<>();
+        workers.add(worker);
+        mainRepository.getWorkerRepository().setWorkers(workers);
+
+        // Act
+        Worker result = workerService.getWorkerByUsername("nonexistent");
+
+        // Assert
+        Assertions.assertNull(result.getUsername());
+    }
 }

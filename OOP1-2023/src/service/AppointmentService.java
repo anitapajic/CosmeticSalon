@@ -24,6 +24,7 @@ public class AppointmentService {
     public void deleteAppointment(Appointment appointment){
         mainRepository.getAppointmentRepository().getAppointments().remove(appointment);
     }
+    
     public void updateAppointment(Appointment appointment){
         Appointment appointment1 = new Appointment();
         for(Appointment app : mainRepository.getAppointmentRepository().getAppointments()){
