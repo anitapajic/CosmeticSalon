@@ -51,6 +51,26 @@ public class ClientServiceTest {
         Assertions.assertTrue(result.contains(appointment1));
         Assertions.assertTrue(result.contains(appointment2));
     }
+    
+    @Test
+    public void testGetClientAppointments_clientHasNoAppointments_returnsEmptyList() {
+        // Arrange
+        String username = "jane_smith";
+        Appointment appointment1 = new Appointment();
+        appointment1.setId(1);
+        appointment1.setClient("another_client");
+        Appointment appointment2 = new Appointment();
+        appointment2.setId(2);
+        appointment2.setClient("yet_another_client");
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment1);
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment2);
+
+        // Act
+        ArrayList<Appointment> result = clientService.getClientAppointments(username);
+
+        // Assert
+        Assertions.assertTrue(result.isEmpty());
+    }
 
     @Test
     public void testGetSpentMoney() {
@@ -69,5 +89,27 @@ public class ClientServiceTest {
         double result = clientService.getSpentMoney("username");
 
         Assertions.assertEquals(150, result);
+    }
+    
+    @Test
+    public void testGetSpentMoney_clientHasNoAppointments_returnsZero() {
+        // Arrange
+        String username = "jane_smith";
+        Appointment appointment1 = new Appointment();
+        appointment1.setId(1);
+        appointment1.setClient("another_client");
+        appointment1.setPrice(50.0);
+        Appointment appointment2 = new Appointment();
+        appointment2.setId(2);
+        appointment2.setClient("yet_another_client");
+        appointment2.setPrice(75.0);
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment1);
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment2);
+
+        // Act
+        double result = clientService.getSpentMoney(username);
+
+        // Assert
+        Assertions.assertEquals(0.0, result);
     }
 }

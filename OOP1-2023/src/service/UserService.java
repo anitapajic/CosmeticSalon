@@ -56,30 +56,31 @@ public class UserService {
         for(Person u: users){
             if(username.equalsIgnoreCase(u.getUsername()) && password.equalsIgnoreCase(u.getPassword())){
                 switch (u.getRole()) {
-                    case CLIENT -> {
+                    case CLIENT:
                         Client client = new Client(u);
                         ClientMainWindow clientMainWindow = new ClientMainWindow(mainRepository, client);
                         clientMainWindow.setVisible(true);
-                    }
-                    case COSMETICIAN -> {
+                        break;
+
+                    case COSMETICIAN:
                         Cosmetician cosmetician = new Cosmetician(u);
                         CosmeticianMainWindow cosmeticianMainWindow = new CosmeticianMainWindow(mainRepository, cosmetician);
                         cosmeticianMainWindow.setVisible(true);
-                    }
-                    case RECEPCIONIST -> {
+                        break;
+                    case RECEPCIONIST:
                         Receptionist receptionist = new Receptionist(u);
                         RecepcionistMainWindow recepcionistMainWindow = new RecepcionistMainWindow(mainRepository, receptionist);
                         recepcionistMainWindow.setVisible(true);
-                    }
-                    case MENAGER -> {
+                        break;
+                    case MENAGER:
                         Menager menager = new Menager(u);
                         MenagerMainWindow menagerMainWindow = new MenagerMainWindow(mainRepository, menager);
                         menagerMainWindow.setVisible(true);
-                    }
-                    default -> {
+                        break;
+                    default:
                         JOptionPane.showMessageDialog(null, "You don't have an account. Please register first.", "Error!",
                                 JOptionPane.ERROR_MESSAGE);
-                    }
+
                 }
             }
         }

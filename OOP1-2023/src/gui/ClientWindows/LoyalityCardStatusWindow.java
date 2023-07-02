@@ -1,18 +1,13 @@
 package gui.ClientWindows;
 
-import gui.MenagerWindows.LoyalityCardValueWindow;
 import model.Client;
 import model.Enum.LoyalityCardStatus;
-import model.Menager;
 import net.miginfocom.swing.MigLayout;
 import repository.MainRepository;
 import service.MainService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.ref.Cleaner;
 
 public class LoyalityCardStatusWindow extends JFrame {
     private MainRepository mainRepository;

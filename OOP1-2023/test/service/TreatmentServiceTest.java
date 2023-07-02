@@ -34,4 +34,21 @@ public class TreatmentServiceTest {
 
         Assertions.assertEquals(treatment, result);
     }
+    @Test
+    public void testGetTreatmentById_treatmentDoesNotExist_returnsNull() {
+        // Arrange
+        Treatment treatment = new Treatment();
+        treatment.setId(55);
+        treatment.setName("treatment");
+
+        ArrayList<Treatment> treatments = new ArrayList<>();
+        treatments.add(treatment);
+        mainRepository.getTreatmentsRepository().setTreatmentsList(treatments);
+
+        // Act
+        Treatment result = treatmentService.getTreatmentById(56);
+
+        // Assert
+        Assertions.assertNull(result.getName());
+    }
 }

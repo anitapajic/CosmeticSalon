@@ -16,20 +16,12 @@ import java.util.ArrayList;
 public class MenagerServiceTest {
     private MainRepository mainRepository;
     private MenagerService menagerService;
-    private UserService userService;
-    private ClientService clientService;
-    private CosmeticianService cosmeticianService;
-    private RecepcionistService recepcionistService;
 
     @BeforeEach
     public void setup() {
         Salon salon = new Salon("Initial name", "00h-00h");
 
         this.mainRepository = new MainRepository(salon, new WorkerRepository(), new UserRepository(), new ClientRepository(), new CosmeticianRepository(), new RecepcionistRepository(),new MenagerRepository() , new TreatmentsRepository(), new AppointmentRepository());
-        userService = new UserService(mainRepository);
-        clientService = new ClientService(mainRepository);
-        cosmeticianService = new CosmeticianService(mainRepository);
-        recepcionistService = new RecepcionistService(mainRepository);
         menagerService = new MenagerService(mainRepository);
 
     }
@@ -252,6 +244,27 @@ public class MenagerServiceTest {
 
         // Assert the monthly income
         Assertions.assertEquals(250.0, result);
+    }
+    @Test
+    public void testGetIncomeMonthly_noAppointments() {
+        // Arrange
+        int monthIndex = 10; // November
+        Appointment appointment1 = new Appointment();
+        appointment1.setStatus(TreatmentStatus.SCHEDULED);
+        appointment1.setStartTime(LocalDateTime.of(2023, 9, 5, 10, 0));
+        appointment1.setPrice(50.0);
+        Appointment appointment2 = new Appointment();
+        appointment2.setStatus(TreatmentStatus.SCHEDULED);
+        appointment2.setStartTime(LocalDateTime.of(2023, 9, 12, 15, 30));
+        appointment2.setPrice(75.0);
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment1);
+        mainRepository.getAppointmentRepository().getAppointments().add(appointment2);
+
+        // Act
+        double result = menagerService.getIncomeMonthly(monthIndex);
+
+        // Assert
+        Assertions.assertEquals(0.0, result);
     }
     @Test
     public void testGetOutcomeMonthly() {

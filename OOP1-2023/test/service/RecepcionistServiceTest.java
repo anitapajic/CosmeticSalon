@@ -51,6 +51,26 @@ public class RecepcionistServiceTest {
 
         Assertions.assertFalse(recepcionists.contains(recepcionist1));
     }
+    @Test
+    public void testRemoveRecepcionist_recepcionistExists_successfullyRemovesRecepcionist() {
+        // Arrange
+        Receptionist recepcionist1 = new Receptionist();
+        recepcionist1.setUsername("username1");
+        Receptionist recepcionist2 = new Receptionist();
+        recepcionist2.setUsername("username2");
+
+        ArrayList<Receptionist> recepcionists = new ArrayList<>();
+        recepcionists.add(recepcionist1);
+        recepcionists.add(recepcionist2);
+        mainRepository.getRecepcionistRepository().setRecepcionists(recepcionists);
+
+        // Act
+        recepcionistService.removeRecepcionist("username1");
+
+        // Assert
+        Assertions.assertFalse(recepcionists.contains(recepcionist1));
+        Assertions.assertTrue(recepcionists.contains(recepcionist2));
+    }
 
     @Test
     public void testGetAllAppointments() {
@@ -88,5 +108,27 @@ public class RecepcionistServiceTest {
         Appointment result = appointmentService.getAppointmentById(57);
 
         Assertions.assertEquals(updatedAppointment, result);
+    }
+    
+    @Test
+    public void testUpdateAppointment_appointmentDoesNotExist() {
+        // Arrange
+        Appointment appointment1 = new Appointment();
+        appointment1.setId(57);
+
+        ArrayList<Appointment> appointments = new ArrayList<>();
+        appointments.add(appointment1);
+        mainRepository.getAppointmentRepository().setAppointments(appointments);
+
+        Appointment updatedAppointment = new Appointment();
+        updatedAppointment.setId(58);
+        updatedAppointment.setName("updated appointment");
+
+        // Act
+        recepcionistService.updateAppointment(updatedAppointment);
+        Appointment result = appointmentService.getAppointmentById(57);
+
+        // Assert
+        Assertions.assertEquals(appointment1, result);
     }
 }

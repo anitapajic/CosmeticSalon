@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/OOP1-2023"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<testFolder url="file://$MODULE_DIR$/test"/>
+	</contentEntry>
+	<lib name="JUnit5.8.1" scope="TEST"/>
+	<lib name="junit-jupiter-api-5.9.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libraries/junit-jupiter-api-5.9.2.jar!/"/>
+	</lib>
+	<lib name="junit5-4.6.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libraries/junit5-4.6.1.jar!/"/>
+	</lib>
+	<lib name="miglayout-4.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libraries/miglayout-4.0.jar!/"/>
+	</lib>
+	<lib name="xchart-3.8.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libraries/xchart-3.8.2.jar!/"/>
+	</lib>
+	<lib name="xchart-demo-3.8.2.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/libraries/xchart-demo-3.8.2.jar!/"/>
+	</lib>
+	<levels>
+		<level name="xchart-3.8.2" value="project"/>
+	</levels>
+</component>
